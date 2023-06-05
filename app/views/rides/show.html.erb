@@ -1,0 +1,44 @@
+<h1><%= @ride.start_location %></h1>
+<p><%= @ride.end_location %></p>
+<p><%= @ride.ride_details %></p>
+<p><%= @ride.start_time %></p>
+<p><%= @ride.end_time %></p>
+<p><%= @ride.price %></p>
+
+<%= link_to "back", rides_path %>
+
+<%= link_to "Delete",
+ride_path(@ride),
+data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>
+
+
+
+<%# <h2>Reviews</h2>
+ @ride.reviews.each do |review|
+  <div>
+    <p><strong>Rating:</strong> = review.rating </p>
+    <p><strong>Comment:</strong> = review.content </p>
+    = link_to "Delete review",
+    ride_review_path(@ride, review),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+
+    <hr>
+  </div>
+ end  %>
+
+<%# <!-- Add Review Form -->
+<h2>Add Review</h2>
+ simple_form_for [@ride, @review] do |form|
+  <div>
+     form.label :rating
+     form.number_field :rating, min: 1, max: 5
+  </div>
+  <div>
+     form.label :content
+     form.text_area :content
+  </div>
+  <div>
+     form.submit 'Add Review'
+  </div>
+ end  %>

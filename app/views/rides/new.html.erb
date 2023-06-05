@@ -1,0 +1,9 @@
+<%= simple_form_for(@ride) do |f| %>
+  <%= f.input :start_location %>
+  <%= f.input :end_location %>
+  <%= f.input :ride_details %>
+  <%= f.input :start_time %>
+  <%= f.input :end_time %>
+  <%= f.input :price %>
+  <%= f.submit %>
+<% end %>
