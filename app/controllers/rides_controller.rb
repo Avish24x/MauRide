@@ -7,6 +7,7 @@ class RidesController < ApplicationController
 
   def show
     @review = Review.new
+    @booking = Booking.new
   end
 
   def new
@@ -22,6 +23,7 @@ class RidesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
 
   def destroy
     @ride = Ride.find(params[:id])
