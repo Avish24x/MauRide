@@ -7,10 +7,12 @@
 
 <%= link_to "back", rides_path %>
 
-<%= link_to "Delete",
-ride_path(@ride),
-data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-%>
+<%# <% if @ride.vehicule.user = current_user %> %>
+  <%= link_to "Delete",
+  ride_path(@ride),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+  %>
+<%# <% end %> %>
 
 <h2>Reviews</h2>
 <% @ride.reviews.each do |review| %>
@@ -18,10 +20,14 @@ data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
     <p><strong>Rating:</strong> <%= review.rating %></p>
     <p><strong>Comment:</strong> <%= review.comment %></p>
     <p><strong><%= time_ago_in_words(review.timestamp) %></strong></p>
-    <%= link_to "Delete review",
-    ride_review_path(@ride, review),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    %>
+
+    <%# <% if @review.user = current_user %> %>
+      <%= link_to "Delete review",
+      ride_review_path(@ride, review),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+      %>
+    <%# <% end %> %>
+
     <hr>
   </div>
 <% end %>

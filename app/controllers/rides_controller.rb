@@ -16,14 +16,13 @@ class RidesController < ApplicationController
 
   def create
     @ride = Ride.new(ride_params)
-    # @ride.user = current_user
+    @ride.user = current_user
     if @ride.save
       redirect_to ride_path(@ride)
     else
       render :new, status: :unprocessable_entity
     end
   end
-
 
   def destroy
     @ride = Ride.find(params[:id])
