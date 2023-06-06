@@ -1,8 +1,12 @@
 class RidesController < ApplicationController
-  before_action :set_ride, only: %i[show destroy update]
+  before_action :set_ride, only: [:show]
 
   def index
     @rides = Ride.all
+  end
+
+  def show
+    @review = Review.new
   end
 
   def new
@@ -18,8 +22,6 @@ class RidesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
-  def show; end
 
   def destroy
     @ride.destroy
