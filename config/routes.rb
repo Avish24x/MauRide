@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :rides
+  resources :bookings, only: %i[destroy index create new]
 end
