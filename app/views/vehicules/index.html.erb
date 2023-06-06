@@ -1,0 +1,14 @@
+
+<%# changer le path, aller sur le profil du DRIVER %>
+<%= link_to "Back", root_path %>
+<p>
+<% @vehicules.each do |vehicule| %>
+  <p><%= link_to vehicule.registration_detail, vehicule_path(vehicule) %>
+  <p>Model : <%= vehicule.model %></p>
+  <p>Capacity : <%= vehicule.capacity %> persons</p>
+  <p>Registration details : <%= vehicule.registration_detail %></p>
+  </p>
+<% end %>
+</p>
+
+<p><%= link_to "add a new vehicule", new_vehicule_path %></p>

@@ -1,8 +1,13 @@
 class RidesController < ApplicationController
-  before_action :set_ride, only: %i[show destroy update]
+  before_action :set_ride, only: [:show]
 
   def index
     @rides = Ride.all
+  end
+
+  def show
+    @review = Review.new
+    @booking = Booking.new
   end
 
   def new
@@ -19,11 +24,9 @@ class RidesController < ApplicationController
     end
   end
 
-  def show
-    @booking = Booking.new
-  end
 
   def destroy
+    @ride = Ride.find(params[:id])
     @ride.destroy
     redirect_to rides_path, status: :see_other
   end
