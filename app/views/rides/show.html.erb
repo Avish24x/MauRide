@@ -17,7 +17,7 @@ data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
   <div>
     <p><strong>Rating:</strong> <%= review.rating %></p>
     <p><strong>Comment:</strong> <%= review.comment %></p>
-    <p><strong><%= review.timestamp %></strong></p>
+    <p><strong><%= time_ago_in_words(review.timestamp) %></strong></p>
     <%= link_to "Delete review",
     ride_review_path(@ride, review),
     data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
@@ -29,7 +29,7 @@ data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
 <h2>Add Review</h2>
 
 <%= simple_form_for [@ride, @review] do |f| %>
-    <%= f.input :rating, collection: 0..5 %>
+    <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
     <%= f.input :comment %>
     <%= f.submit class: 'btn btn-primary' %>
 <% end %>
