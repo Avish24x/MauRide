@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :rides do
     resources :reviews
   end
+  resources :vehicules
   resources :reviews, only: [:destroy]
 end
