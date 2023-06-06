@@ -3,8 +3,7 @@
 <%= link_to "Back", root_path %>
 <p>
 <% @vehicules.each do |vehicule| %>
-  <p><%= link_to vehicule.registration_detail, vehicule_path(vehicule) %>
-  <p>Model : <%= vehicule.model %></p>
+  <p><%= link_to "Model : #{vehicule.model}", vehicule_path(vehicule) %>
   <p>Capacity : <%= vehicule.capacity %> persons</p>
   <p>Registration details : <%= vehicule.registration_detail %></p>
   </p>
