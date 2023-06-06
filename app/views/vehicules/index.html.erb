@@ -4,7 +4,7 @@
 <p>
 <% @vehicules.each do |vehicule| %>
   <p><%= link_to "Model : #{vehicule.model}", vehicule_path(vehicule) %>
-  <p>Capacity : <%= vehicule.capacity %> persons</p>
+  <%# <p>Capacity : <%= vehicule.capacity persons</p> %>
   <p>Registration details : <%= vehicule.registration_detail %></p>
   </p>
 <% end %>

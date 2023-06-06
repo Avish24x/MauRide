@@ -24,7 +24,6 @@ class RidesController < ApplicationController
     end
   end
 
-
   def destroy
     @ride = Ride.find(params[:id])
     @ride.destroy
@@ -34,7 +33,7 @@ class RidesController < ApplicationController
   private
 
   def ride_params
-    params.require(:ride).permit(:start_location, :end_location, :ride_details, :distance, :start_time, :end_time, :price)
+    params.require(:ride).permit(:start_location, :end_location, :ride_details, :distance, :start_time, :end_time, :price, :seats)
   end
 
   def set_ride
