@@ -1,11 +1,11 @@
 <%= link_to "Back", root_path %>
-
+<p>
 <% @rides.each do |ride| %>
-  <%= link_to ride.ride_details, ride_path(ride) %>
-  <%= ride.price %>
-  <%= ride.start_location %>
-  <%= ride.end_location %>
-   <%= ride.start_time %>
+  <p><%= link_to "Ride from #{ride.start_location} to #{ride.end_location}", ride_path(ride) %></p>
+  <p>Start time : <%= ride.start_time %></p>
+  <p>Price : <%= ride.price %> Rs</p>
+  <p>Details : <%= ride.ride_details %></p>
 <% end %>
+</p>
 
 <p><%= link_to "add a new ride", new_ride_path %></p>

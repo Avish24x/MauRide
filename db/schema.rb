@@ -23,19 +23,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_185234) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
-
-  create_table "rating_caches", force: :cascade do |t|
-    t.string "cacheable_type"
-    t.bigint "cacheable_id"
-    t.float "avg", null: false
-    t.integer "qty", null: false
-    t.string "dimension"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type"
-    t.index ["cacheable_type", "cacheable_id"], name: "index_rating_caches_on_cacheable"
-  end
-
   create_table "reviews", force: :cascade do |t|
     t.float "rating"
     t.text "comment"
@@ -89,11 +76,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_185234) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_vehicules_on_user_id"
   end
-  
+
   add_foreign_key "bookings", "rides"
   add_foreign_key "bookings", "users"
   add_foreign_key "reviews", "rides"
   add_foreign_key "reviews", "users"
   add_foreign_key "vehicules", "users"
-
 end
