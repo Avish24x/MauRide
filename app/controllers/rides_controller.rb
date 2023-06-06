@@ -24,6 +24,7 @@ class RidesController < ApplicationController
   end
 
   def destroy
+    @ride = Ride.find(params[:id])
     @ride.destroy
     redirect_to rides_path, status: :see_other
   end
