@@ -1,6 +1,6 @@
 class Vehicule < ApplicationRecord
-  belongs_to :user
-  has_many :rides
+  belongs_to :ride
+  has_many :users
 
-  validates :model, :capacity, presence: true
+  validates :model, presence: true
 end

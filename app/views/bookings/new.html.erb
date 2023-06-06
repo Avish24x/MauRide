@@ -4,9 +4,7 @@
   <%= form.error_notification %>
 
   <div class="form-inputs">
-    <%= form.input :user_id, collection: User.all, label_method: :first_name, value_method: :id, include_blank: false %>
-    <%= form.input :ride_id, collection: Ride.all, label_method: :ride_details, value_method: :id, include_blank: false %>
-    <%# <%= form.input :seats %>
+    <%= form.input :seats %>
   </div>
 
   <div class="form-actions">

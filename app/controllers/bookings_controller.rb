@@ -10,15 +10,17 @@ class BookingsController < ApplicationController
   end
 
   def create
+    @ride = Ride.find(params[:ride_id])
     @booking = Booking.new(booking_params)
     @booking.user = current_user
+    @booking.ride = @ride
     if @booking.save
+      @ride.seats -= booking_params[:booked_seats].to_i
+      @ride.save
       redirect_to booking_path(@booking)
     else
       render :new, status: :unprocessable_entity
     end
-
-
   end
 
   def show
@@ -32,7 +34,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:user_id, :ride_id, :seats)
+    params.require(:booking).permit(:user_id, :ride_id, :booked_seats)
   end
 
   def set_booking
