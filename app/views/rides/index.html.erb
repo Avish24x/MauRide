@@ -5,7 +5,10 @@
   <p>Start time : <%= ride.start_time %></p>
   <p>Price : <%= ride.price %> Rs</p>
   <p>Details : <%= ride.ride_details %></p>
+  <%# seats available = rides.seats - booking.booked_seats %>
 <% end %>
 </p>
 
 <p><%= link_to "add a new ride", new_ride_path %></p>
+
+<%= link_to "bookings", bookings_path %>
