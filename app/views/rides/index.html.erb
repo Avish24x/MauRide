@@ -1,13 +1,13 @@
 <%= link_to "Back", root_path %>
-<p>
-<% @rides.each do |ride| %>
-  <p><%= link_to "Ride from #{ride.start_location} to #{ride.end_location}", ride_path(ride) %></p>
-  <p>Start time : <%= ride.start_time %></p>
-  <p>Price : <%= ride.price %> Rs</p>
-  <p>Details : <%= ride.ride_details %></p>
-  <%# seats available = rides.seats - booking.booked_seats %>
-<% end %>
-</p>
+
+<div>
+  <% @rides.each do |ride| %>
+    <p><%= link_to "Ride from #{ride.start_location} to #{ride.end_location}", ride_path(ride) %></p>
+    <p><strong>Start time : </strong> <%= ride.start_time %></p>
+    <p><strong>Price : </strong> <%= ride.price %> Rs</p>
+    <%# seats available = rides.seats - booking.booked_seats %>
+  <% end %>
+</div>
 
 <p><%= link_to "add a new ride", new_ride_path %></p>
 
