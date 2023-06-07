@@ -1,0 +1,20 @@
+<h1>this is the user show page</h1>
+<%= link_to "Back", root_path %>
+
+<div>
+  <h2>My Bookings</h2>
+  <h3>Planning</h3>
+  <h3>Previews rides</h3>
+</div>
+
+<div>
+  <h2>Reviews</h2>
+  <% @user.reviews.each do |review| %>
+    <p><strong>Rating:</strong> <%= review.rating %></p>
+    <p><strong>Comment:</strong> <%= review.comment %></p>
+    <p><strong><%= time_ago_in_words(review.timestamp) %></strong></p>
+
+    <%= link_to "Delete review", ride_review_path(@ride, review),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%><hr>
+  <% end %>
+</div>

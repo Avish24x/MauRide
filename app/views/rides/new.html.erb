@@ -1,4 +1,4 @@
-<%= simple_form_for(@ride) do |f| %>
+<%= simple_form_for @ride do |f| %>
   <%= f.input :start_location %>
   <%= f.input :end_location %>
   <%= f.input :ride_details %>
@@ -6,5 +6,6 @@
   <%= f.input :end_time %>
   <%= f.input :price %>
   <%= f.input :seats %>
+  <%= f.association :vehicule, collection: Vehicule.where(user: current_user), label_method: :model %>
   <%= f.submit %>
 <% end %>

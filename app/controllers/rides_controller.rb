@@ -16,10 +16,10 @@ class RidesController < ApplicationController
 
   def create
     @ride = Ride.new(ride_params)
-    # @ride.user = current_user
     if @ride.save
       redirect_to ride_path(@ride)
     else
+      puts @ride.errors.full_messages # Add this line to see any error messages in the console
       render :new, status: :unprocessable_entity
     end
   end
@@ -33,7 +33,7 @@ class RidesController < ApplicationController
   private
 
   def ride_params
-    params.require(:ride).permit(:start_location, :end_location, :ride_details, :distance, :start_time, :end_time, :price, :seats)
+    params.require(:ride).permit(:start_location, :end_location, :ride_details, :start_time, :end_time, :price, :seats, :vehicule_id)
   end
 
   def set_ride
