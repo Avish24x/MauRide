@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_07_063109) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_07_211622) do
+
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,8 +49,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_063109) do
     t.integer "seats"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
     t.bigint "vehicule_id", null: false
     t.index ["vehicule_id"], name: "index_rides_on_vehicule_id"
+
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,6 +72,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_063109) do
     t.string "payment_details"
     t.integer "rating"
     t.string "account_status"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
