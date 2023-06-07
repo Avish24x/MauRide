@@ -69,7 +69,7 @@ puts "creation de plusieurs drivers"
   driver_seed.save
 
   puts "creation d'une voiture pour le driver"
-  vehicule = Vehicule.create(
+  vehicule_seed = Vehicule.create(
     model: Faker::Vehicle.make_and_model,
     registration_detail: Faker::Vehicle.standard_specs,
     user_id: driver_seed.id
@@ -88,7 +88,8 @@ puts "creation de plusieurs drivers"
       start_time: Faker::Time.between(from: DateTime.now, to: DateTime.now + 1, format: :short),
       end_time: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 2, format: :short),
       price: rand(100..1000),
-      seats: rand(1..4)
+      seats: rand(1..4),
+      vehicule_id: vehicule_seed.id
     )
 
     puts "creation d'un booking par ride"
