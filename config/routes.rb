@@ -8,9 +8,9 @@ Rails.application.routes.draw do
 
   resources :rides do
     resources :reviews
-    resources :bookings
+    resources :bookings, only: %i[create]
   end
   resources :vehicules
   resources :reviews, only: [:destroy]
-  resources :bookings, only: %i[destroy index create new]
+  resources :bookings, only: %i[destroy index]
 end

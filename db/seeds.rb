@@ -24,6 +24,19 @@ puts "deleted all rides"
 User.destroy_all
 puts "deleted all user"
 
+User.create(
+  email:'test@gmail.com',
+  password: "password",
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  age: rand(18..60),
+  location: Faker::Address.full_address,
+  phone_number: Faker::PhoneNumber.cell_phone_in_e164,
+  payment_details: Faker::Finance.credit_card,
+  rating: rand(0..5),
+  account_status: "user"
+)
+
 puts "creation d'un passenger"
 passenger_seed = User.create(
   email: Faker::Internet.email,
@@ -58,7 +71,6 @@ puts "creation de plusieurs drivers"
   puts "creation d'une voiture pour le driver"
   vehicule = Vehicule.create(
     model: Faker::Vehicle.make_and_model,
-    capacity: rand(1..4),
     registration_detail: Faker::Vehicle.standard_specs,
     user_id: driver_seed.id
   )
@@ -75,7 +87,8 @@ puts "creation de plusieurs drivers"
       distance: rand(1..61),
       start_time: Faker::Time.between(from: DateTime.now, to: DateTime.now + 1, format: :short),
       end_time: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 2, format: :short),
-      price: rand(100..1000)
+      price: rand(100..1000),
+      seats: rand(1..4)
     )
 
     puts "creation d'un booking par ride"

@@ -26,17 +26,19 @@ data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
   </div>
 <% end %>
 
-<%= simple_form_for @booking do |form| %>
+<%= simple_form_for [@ride, @booking] do |form| %>
   <%= form.error_notification %>
 
   <div class="form-inputs">
-    <%= form.input :seats %>
+    <%= form.input :booked_seats, collection: (1..@ride.seats).to_a %>
   </div>
 
   <div class="form-actions">
     <%= form.button :submit, "Create Booking" %>
   </div>
 <% end %>
+
+
 <!-- Add Review Form -->
 <h2>Add Review</h2>
 
