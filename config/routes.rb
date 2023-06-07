@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   end
   resources :vehicules
   resources :reviews, only: [:destroy]
-  resources :bookings, only: %i[destroy index]
+  resources :bookings, only: %i[destroy index create new]
 end
