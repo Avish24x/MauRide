@@ -2,7 +2,7 @@ class VehiculesController < ApplicationController
   before_action :set_vehicule, only: [:show]
 
   def index
-    @vehicules = Vehicule.all
+    @vehicules = Vehicule.where(user: current_user)
   end
 
   def show; end
@@ -15,7 +15,7 @@ class VehiculesController < ApplicationController
     @vehicule = Vehicule.new(vehicule_params)
     @vehicule.user = current_user
     if @vehicule.save
-      redirect_to vehicule_path(@vehicule)
+      redirect_to vehicules_path(@vehicule)
     else
       render :new, status: :unprocessable_entity
     end
