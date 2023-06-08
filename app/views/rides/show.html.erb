@@ -1,67 +1,82 @@
 <%= link_to "back", rides_path %>
 
-
-<%= link_to "Delete",
-ride_path(@ride),
-data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-%>
-<div style="width: 100%; height: 600px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-
-<h2>Reviews</h2>
-<% @ride.reviews.each do |review| %>
-  <div>
-    <p><strong>Rating:</strong> <%= review.rating %></p>
-    <p><strong>Comment:</strong> <%= review.comment %></p>
-    <p><strong><%= time_ago_in_words(review.timestamp) %></strong></p>
-
-    <% if current_user == review.user %>
-      <%= link_to "Delete review",
-      ride_review_path(@ride, review),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-      %>
-    <% end %>
-    <hr>
+<div class="notification">
+  <div style="width: 100%; height: 600px;"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
-<% end %>
+</div>
 
 <div>
-  <h1><%= @ride.start_location %> to <%= @ride.end_location %></h1>
-  <p><strong>Start time : </strong><%= @ride.start_time %></p>
-  <p><strong>End time : </strong><%= @ride.end_time %></p>
-  <p><strong>Price : </strong><%= @ride.price %></p>
-  <p><strong>Details : </strong><%= @ride.ride_details %></p>
-  <%# seats available = rides.seats - booking.booked_seats %>
+  <h2>Ride</h2>
+  <div class="notification">
+    <%# attention, si on rajoute une ligen ici, ca fait une colonne dans page  %>
+    <div class="notification-content">
+      <h2><%= @ride.start_location %> to <%= @ride.end_location %></h2>
+      <p><strong>Start time : </strong><%= @ride.start_time %></p>
+      <p><strong>End time : </strong><%= @ride.end_time %></p>
+      <p><strong>Price : </strong><%= @ride.price %></p>
+      <p><strong>Details : </strong><%= @ride.ride_details %></p>
+      <%# seats available = rides.seats - booking.booked_seats %>
 
+      <%= simple_form_for [@ride, @booking] do |form| %>
+        <%= form.error_notification %>
 
-  <%= simple_form_for [@ride, @booking] do |form| %>
-    <%= form.error_notification %>
+        <div class="form-inputs">
+          <%= form.input :booked_seats, collection: (1..@ride.seats) %>
+        </div>
 
-    <div class="form-inputs">
-      <%= form.input :booked_seats, collection: (1..@ride.seats) %>
+        <div class="form-actions">
+          <%= form.button :submit, "Create Booking" %>
+        </div>
+      <% end %>
+
+      <%# on affiche icone poubelle  %>
+      <div class="notification-actions">
+        <% if current_user == @ride.vehicule.user %>
+          <%= link_to ride_path(@ride),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %><hr>
+        <% end %>
+      </div>
     </div>
+  </div>
+</div>
 
-    <div class="form-actions">
-      <%= form.button :submit, "Create Booking" %>
+<div>
+  <h2>Reviews</h2>
+  <% @ride.reviews.each do |review| %>
+    <div class="notification-review">
+      <%# on affiche le createur de la review (image wagon pour l'instant) %>
+      <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+      <div class="notification-content">
+        <p><small><%= time_ago_in_words(review.timestamp) %></small></p>
+          <p><strong>Rating:</strong> <%= review.rating %></p>
+          <p><strong>Comment:</strong> <%= review.comment %></p>
+      </div>
+
+      <%# on affiche icone poubelle  %>
+      <div class="notification-actions">
+        <% if current_user == review.user %>
+          <%= link_to ride_review_path(@ride, review),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %><hr>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
 
-<% if current_user == @ride.vehicule.user %>
-  <%= link_to "Remove your ride",
-  ride_path(@ride),
-  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-  %>
-<% end %>
-
 <div>
-  <h2>Add Review : a afficher uniquement quand date ride dépassée</h2>
-
-  <%= simple_form_for [@ride, @review] do |f| %>
-    <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
-    <%= f.input :comment %>
-    <%= f.submit class: 'btn btn-primary' %>
-  <% end %>
+  <h2>Add Review</h2>
+  <div class="notification">
+    <%= simple_form_for [@ride, @review] do |f| %>
+      <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
+      <%= f.input :comment %>
+      <%= f.submit class: 'btn btn-primary' %><hr>
+    <% end %>
+  </div>
 </div>

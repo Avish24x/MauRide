@@ -24,10 +24,10 @@ export default class extends Controller {
       }),
       'top-left'
       );
-
-        // this.#addMarkersToMap()
-        // this.#fitMapToMarkers()
-        // this.map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
-        //                                     mapboxgl: mapboxgl }))
-      }
+      //   this.#addMarkersToMap()
+      //   this.#fitMapToMarkers()
+      //   this.map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
+      //                                       mapboxgl: mapboxgl }))
+      // }
   }
+}
