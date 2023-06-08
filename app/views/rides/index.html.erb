@@ -3,10 +3,12 @@
 <div>
   <% @rides.each do |ride| %>
     <div class="notification" >
-      <p><%= link_to "Ride from #{ride.start_location} to #{ride.end_location}", ride_path(ride) %></p>
+      <p><strong><%= ride.start_time.strftime("%H:%M")%></strong> <%= link_to ride_path(ride) do %>
+        <strong><%= ride.start_location%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= ride.end_location%></strong></p>
+      <% end %><hr>
+
       <div class="notification-content">
-        <p><strong>Start time : </strong> <%= ride.start_time %></p>
-        <p><strong>Price : </strong> <%= ride.price %> Rs</p>
+        <p><strong><%= ride.price %></strong> <i class="fa-solid fa-rupee-sign"></i></p>
         <%# seats available = rides.seats - booking.booked_seats %>
       </div>
     </div>

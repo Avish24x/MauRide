@@ -13,10 +13,10 @@
   <div class="notification">
     <%# attention, si on rajoute une ligen ici, ca fait une colonne dans page  %>
     <div class="notification-content">
-      <h2><%= @ride.start_location %> to <%= @ride.end_location %></h2>
-      <p><strong>Start time : </strong><%= @ride.start_time %></p>
-      <p><strong>End time : </strong><%= @ride.end_time %></p>
-      <p><strong>Price : </strong><%= @ride.price %></p>
+      <h2><strong><%= @ride.start_location%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= @ride.end_location%></strong></h2>
+      <p><strong>Start time : </strong><%= @ride.start_time.strftime("%-d %b %Y, %H:%M") %></p>
+      <p><strong>End time : </strong><%= @ride.end_time.strftime("%-d %b %Y, %H:%M") %></p>
+      <p><strong>Price : </strong><%= @ride.price %> Rs</p>
       <p><strong>Details : </strong><%= @ride.ride_details %></p>
       <%# seats available = rides.seats - booking.booked_seats %>
 
