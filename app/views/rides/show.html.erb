@@ -16,10 +16,13 @@ data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
     <p><strong>Rating:</strong> <%= review.rating %></p>
     <p><strong>Comment:</strong> <%= review.comment %></p>
     <p><strong><%= time_ago_in_words(review.timestamp) %></strong></p>
-    <%= link_to "Delete review",
-    ride_review_path(@ride, review),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    %>
+
+    <% if current_user == review.user %>
+      <%= link_to "Delete review",
+      ride_review_path(@ride, review),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+      %>
+    <% end %>
     <hr>
   </div>
 <% end %>
@@ -44,12 +47,14 @@ data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
       <%= form.button :submit, "Create Booking" %>
     </div>
   <% end %>
+</div>
 
-  <%= link_to "Delete (a afficher que pour le driver qui a créé le ride)",
+<% if current_user == @ride.vehicule.user %>
+  <%= link_to "Remove your ride",
   ride_path(@ride),
   data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
   %>
-</div>
+<% end %>
 
 <div>
   <h2>Add Review : a afficher uniquement quand date ride dépassée</h2>
