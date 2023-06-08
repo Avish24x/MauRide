@@ -1,13 +1,13 @@
 
 <%# changer le path, aller sur le profil du DRIVER %>
 <%= link_to "Back", root_path %>
-<p>
-<% @vehicules.each do |vehicule| %>
-  <p><%= link_to "Model : #{vehicule.model}", vehicule_path(vehicule) %>
-  <%# <p>Capacity : <%= vehicule.capacity persons</p> %>
-  <p>Registration details : <%= vehicule.registration_detail %></p>
-  </p>
-<% end %>
-</p>
+<div>
+  <% @vehicules.each do |vehicule| %>
+    <p><%= link_to "Model : #{vehicule.model}", vehicule_path(vehicule) %>
+    <%# <p>Capacity : <%= vehicule.capacity persons</p> %>
+    <p>Registration details : <%= vehicule.registration_detail %></p>
+    </p>
+  <% end %>
+</div>
 
 <p><%= link_to "add a new vehicule", new_vehicule_path %></p>

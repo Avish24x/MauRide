@@ -11,8 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_06_07_211622) do
-
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,11 +47,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_211622) do
     t.integer "seats"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "vehicule_id", null: false
     t.float "latitude"
     t.float "longitude"
-    t.bigint "vehicule_id", null: false
     t.index ["vehicule_id"], name: "index_rides_on_vehicule_id"
-
   end
 
   create_table "users", force: :cascade do |t|
