@@ -1,3 +1,4 @@
+
 <h1>Bookings</h1>
 
 <div>
@@ -21,4 +22,7 @@
   <% end %>
 </div>
 
-<%= link_to "back to rides", rides_path %>
+<%= link_to rides_path,
+          data: {turbo_method: :get} do %>
+            <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
+          <% end %><hr>
