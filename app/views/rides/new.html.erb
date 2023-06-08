@@ -1,11 +1,20 @@
-<%= simple_form_for @ride do |f| %>
-  <%= f.input :start_location %>
-  <%= f.input :end_location %>
-  <%= f.input :ride_details %>
-  <%= f.input :start_time %>
-  <%= f.input :end_time %>
-  <%= f.input :price %>
-  <%= f.input :seats %>
-  <%= f.association :vehicule, collection: Vehicule.where(user: current_user), label_method: :model %>
-  <%= f.submit %>
-<% end %>
+<%= link_to root_path,
+          data: {turbo_method: :get} do %>
+            <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
+          <% end %><hr>
+
+<div class="notification" >
+  <div class="notification-content">
+    <%= simple_form_for @ride do |f| %>
+      <%= f.input :start_location %>
+      <%= f.input :end_location %>
+      <%= f.input :ride_details %>
+      <%= f.input :start_time %>
+      <%= f.input :end_time %>
+      <%= f.input :price %>
+      <%= f.input :seats %>
+      <%= f.association :vehicule, collection: Vehicule.where(user: current_user), label_method: :model %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>

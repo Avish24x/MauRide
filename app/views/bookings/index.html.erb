@@ -1,15 +1,28 @@
+
 <h1>Bookings</h1>
 
 <div>
-<% @bookings.each do |booking| %>
-  <p><strong>Driver : </strong> <%= booking.user.first_name %> - <%= booking.user.last_name %></p>
-  <p><strong>Ride : </strong> from <%= booking.ride.start_location %> to <%= booking.ride.end_location %></p>
-  <p><strong>Seats : </strong> <%= booking.booked_seats %></p>
-  <p><strong>Start time : </strong> <%= booking.ride.start_time %></p>
-  <p><strong>Price : </strong> <%= booking.ride.price %> Rs</p>
+  <% @bookings.each do |booking| %>
+    <div class="notification" >
+      <div class="notification-content">
+        <p><strong>Driver : </strong> <%= booking.user.first_name %> - <%= booking.user.last_name %></p>
+        <p><strong>Ride : </strong> from <%= booking.ride.start_location %> to <%= booking.ride.end_location %></p>
+        <p><strong>Seats : </strong> <%= booking.booked_seats %></p>
+        <p><strong>Start time : </strong> <%= booking.ride.start_time %></p>
+        <p><strong>Price : </strong> <%= booking.ride.price %> Rs</p>
+      </div>
 
-  <%= link_to "Cancel Booking", booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-<% end %>
+      <div class="notification-actions">
+        <%= link_to booking_path(booking),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+          <i class="far fa-trash-alt"></i>
+        <% end %><hr>
+      </div>
+    </div>
+  <% end %>
 </div>
 
-<%= link_to "back to rides", rides_path %>
+<%= link_to rides_path,
+          data: {turbo_method: :get} do %>
+            <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
+          <% end %><hr>

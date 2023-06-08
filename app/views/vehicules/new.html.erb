@@ -1,8 +1,15 @@
-<div>
-  <%= simple_form_for(@vehicule) do |f| %>
-    <%= f.input :model %>
-    <%# <%= f.input :capacity %>
-    <%= f.input :registration_detail %>
-    <%= f.submit %>
-  <% end %>
+<%= link_to vehicules_path,
+          data: {turbo_method: :get} do %>
+            <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
+          <% end %><hr>
+
+<div class="notification" >
+  <div class="notification-content">
+    <%= simple_form_for(@vehicule) do |f| %>
+      <%= f.input :model %>
+      <%# <%= f.input :capacity %>
+      <%= f.input :registration_detail %>
+      <%= f.submit %>
+    <% end %>
+  </div>
 </div>

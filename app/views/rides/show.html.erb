@@ -48,13 +48,13 @@
 <div>
   <h2>Reviews</h2>
   <% @ride.reviews.each do |review| %>
-    <div class="notification-review">
+    <div class="notification">
       <%# on affiche le createur de la review (image wagon pour l'instant) %>
       <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
       <div class="notification-content">
         <p><small><%= time_ago_in_words(review.timestamp) %></small></p>
-          <p><strong>Rating:</strong> <%= review.rating %></p>
-          <p><strong>Comment:</strong> <%= review.comment %></p>
+        <p><strong>Rating:</strong> <%= review.rating %></p>
+        <p><strong>Comment:</strong> <%= review.comment %></p>
       </div>
 
       <%# on affiche icone poubelle  %>
