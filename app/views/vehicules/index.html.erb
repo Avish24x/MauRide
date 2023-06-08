@@ -1,6 +1,9 @@
 
 <%# changer le path, aller sur le profil du DRIVER %>
-<%= link_to "Back", root_path %>
+<%= link_to root_path,
+          data: {turbo_method: :get} do %>
+            <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
+          <% end %><hr>
 
 <p>
 <% @vehicules.each do |vehicule| %>

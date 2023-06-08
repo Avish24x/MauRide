@@ -31,7 +31,7 @@ body {
   background: linear-gradient(90deg, rgba(113,97,239,1) 0%, rgba(149,127,239,1) 53%, rgba(183,156,237,1) 100%);
   border-radius: 10px;
   width: 22rem;
-  margin: auto;
+  margin: 1rem;
   padding-top: 3rem;
   padding-bottom: 3rem;
   padding-left: 2rem;
@@ -40,5 +40,6 @@ body {
 }
 
 .container-home-location h3 {
-  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bolder;
 }
