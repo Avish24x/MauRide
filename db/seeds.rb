@@ -34,7 +34,8 @@ User.create(
   phone_number: Faker::PhoneNumber.cell_phone_in_e164,
   payment_details: Faker::Finance.credit_card,
   rating: rand(0..5),
-  account_status: "user"
+  account_status: "user",
+  location: "Port-Louis"
 )
 
 puts "creation d'un passenger"

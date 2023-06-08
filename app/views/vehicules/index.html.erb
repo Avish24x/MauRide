@@ -1,12 +1,17 @@
 
 <%# changer le path, aller sur le profil du DRIVER %>
 <%= link_to "Back", root_path %>
+
 <p>
 <% @vehicules.each do |vehicule| %>
   <p><%= link_to "Model : #{vehicule.model}", vehicule_path(vehicule) %>
   <%# <p>Capacity : <%= vehicule.capacity persons</p> %>
   <p>Registration details : <%= vehicule.registration_detail %></p>
   </p>
+  <%= link_to "Remove your vehicule",
+  vehicule_path(vehicule),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+  %>
 <% end %>
 </p>
 
