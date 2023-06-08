@@ -1,20 +1,41 @@
 <h1>this is the user show page</h1>
 <%= link_to "Back", root_path %>
 
+<div class="notification">
+  <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+  <div class="notification-content">
+    <p><strong><%= @user.first_name %> <%= @user.last_name %></strong></p>
+  </div>
+
+  <%# ajouter les liens des actions à faire %>
+  <div class="notification-actions">
+    <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
+    <a href="#">Delete <i class="far fa-trash-alt"></i></a>
+  </div>
+</div>
+
 <div>
-  <h2>My Bookings</h2>
-  <h3>Planning</h3>
-  <h3>Previews rides</h3>
+<h2>My Bookings</h2>
+  <div class="notification" >
+    <div class="notification-content">
+      <h3>Planning</h3>
+      <h3>Previews rides</h3>
+    </div>
+  </div>
 </div>
 
 <div>
   <h2>Reviews</h2>
-  <% @user.reviews.each do |review| %>
-    <p><strong>Rating:</strong> <%= review.rating %></p>
-    <p><strong>Comment:</strong> <%= review.comment %></p>
-    <p><strong><%= time_ago_in_words(review.timestamp) %></strong></p>
+  <div class="notification" >
+    <div class="notification-content">
+      <% @user.reviews.each do |review| %>
+        <p><strong>Rating:</strong> <%= review.rating %></p>
+        <p><strong>Comment:</strong> <%= review.comment %></p>
+        <p><strong><%= time_ago_in_words(review.timestamp) %></strong></p>
 
-    <%= link_to "Delete review", ride_review_path(@ride, review),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%><hr>
-  <% end %>
+        <%= link_to "Delete review", ride_review_path(@ride, review),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%><hr>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -1,8 +1,10 @@
-<div>
-  <%= simple_form_for(@vehicule) do |f| %>
-    <%= f.input :model %>
-    <%# <%= f.input :capacity %>
-    <%= f.input :registration_detail %>
-    <%= f.submit %>
-  <% end %>
+<div class="notification" >
+  <div class="notification-content">
+    <%= simple_form_for(@vehicule) do |f| %>
+      <%= f.input :model %>
+      <%# <%= f.input :capacity %>
+      <%= f.input :registration_detail %>
+      <%= f.submit %>
+    <% end %>
+  </div>
 </div>
