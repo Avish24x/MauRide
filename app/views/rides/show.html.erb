@@ -34,10 +34,12 @@
 
       <%# on affiche icone poubelle  %>
       <div class="notification-actions">
-        <%= link_to ride_path(@ride),
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-          <i class="far fa-trash-alt"></i>
-        <% end %><hr>
+        <% if current_user == @ride.vehicule.user %>
+          <%= link_to ride_path(@ride),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %><hr>
+        <% end %>
       </div>
     </div>
   </div>
@@ -57,10 +59,12 @@
 
       <%# on affiche icone poubelle  %>
       <div class="notification-actions">
-        <%= link_to ride_review_path(@ride, review),
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-          <i class="far fa-trash-alt"></i>
-        <% end %><hr>
+        <% if current_user == review.user %>
+          <%= link_to ride_review_path(@ride, review),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %><hr>
+        <% end %>
       </div>
     </div>
   <% end %>

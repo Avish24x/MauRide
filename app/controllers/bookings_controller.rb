@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   def index
-    @bookings = Booking.all
+    @bookings = Booking.where(user: current_user)
   end
 
   def new
@@ -15,7 +15,7 @@ class BookingsController < ApplicationController
     @booking.save
     @ride.seats -= booking_params[:booked_seats].to_i
     @ride.save
-    redirect_to booking_path(@booking)
+    redirect_to bookings_path(@booking)
   end
 
   def show
