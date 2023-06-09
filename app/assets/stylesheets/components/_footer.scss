@@ -21,14 +21,14 @@
 // }
 
 .tab-bar {
-	padding: 1.5rem;
+	padding: 1rem;
 	background-color: #fff;
 	position: fixed;
   bottom: 0;
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	border-radius: 20px 20px;
+	// border-radius: 20px 20px;
 	box-shadow: 0 10px 25px 0 rgba(#000000, 0.195);
 }
 
@@ -81,6 +81,7 @@
 	flex-shrink: 0;
 	left: 18px;
 	position: absolute;
+  padding-top: 10px;
 	// svg {
 	// 	width: 28px;
 	// 	height: 28px;
