@@ -1,9 +1,10 @@
-<%= link_to root_path,
-          data: {turbo_method: :get} do %>
-            <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
-          <% end %><hr>
-
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="section">
+  <%= link_to root_path,
+    data: {turbo_method: :get} do %>
+      <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
+    <% end %><hr>
+  <h2>Edit my profile</h2>
+</div>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
@@ -49,7 +50,7 @@
   <div class="notification">
     <div class="notification-content">
       <div class="form-actions">
-        <%= f.button :submit, "Update" %>
+        <%= f.button :submit, "Update", class: "btn btn-flat" %>
       </div>
     </div>
   </div>
@@ -58,6 +59,6 @@
 
 <div class="notification">
   <div class="notification-content">
-    <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+    <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-flat" %></div>
   </div>
 </div>
