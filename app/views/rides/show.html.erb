@@ -1,4 +1,10 @@
-<%= link_to "back", rides_path %>
+<div class="section">
+  <%= link_to rides_path,
+    data: {turbo_method: :get} do %>
+      <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
+    <% end %><hr>
+  <h2>Ride</h2>
+</div>
 
 <div class="notification">
   <div style="width: 100%; height: 600px;"
@@ -9,7 +15,6 @@
 </div>
 
 <div>
-  <h2>Ride</h2>
   <div class="notification">
     <%# attention, si on rajoute une ligen ici, ca fait une colonne dans page  %>
     <div class="notification-content">
@@ -28,8 +33,9 @@
         </div>
 
         <div class="form-actions">
-          <%= form.button :submit, "Create Booking" %>
+          <%= form.button :submit, "Book now", class: "btn btn-flat" %>
         </div>
+
       <% end %>
 
       <%# on affiche icone poubelle  %>
@@ -76,7 +82,7 @@
     <%= simple_form_for [@ride, @review] do |f| %>
       <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
       <%= f.input :comment %>
-      <%= f.submit class: 'btn btn-primary' %><hr>
+      <%= f.submit class: "btn btn-flat" %><hr>
     <% end %>
   </div>
 </div>
