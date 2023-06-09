@@ -8,6 +8,7 @@ class RidesController < ApplicationController
   def show
     @review = Review.new
     @booking = Booking.new
+    @vehicule = @ride.vehicule
   end
 
   def new
