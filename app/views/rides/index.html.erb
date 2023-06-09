@@ -9,11 +9,10 @@
 <div>
   <% @rides.each do |ride| %>
     <div class="notification" >
-      <p><strong><%= ride.start_time.strftime("%H:%M")%></strong> <%= link_to ride_path(ride) do %>
-        <strong><%= ride.start_location%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= ride.end_location%></strong></p>
-      <% end %><hr>
-
       <div class="notification-content">
+        <p><strong><%= ride.start_time.strftime("%H:%M")%></strong> <%= link_to ride_path(ride) do %>
+          <strong><%= ride.start_location%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= ride.end_location%></strong></p>
+        <% end %><hr>
         <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= ride.price %></strong></p>
         <%# seats available = rides.seats - booking.booked_seats %>
       </div>
@@ -23,5 +22,4 @@
 
 <p><%= link_to "add a new ride", new_ride_path %></p>
 
-<%= link_to "bookings", bookings_path %>
 <%= link_to "vehicules", vehicules_path %>

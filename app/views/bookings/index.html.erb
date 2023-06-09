@@ -13,7 +13,7 @@
         <p><strong>Driver : </strong> <%= booking.user.first_name %> - <%= booking.user.last_name %></p>
         <p><strong>Ride : </strong> from <%= booking.ride.start_location %> to <%= booking.ride.end_location %></p>
         <p><strong>Seats : </strong> <%= booking.booked_seats %></p>
-        <p><strong>Start time : </strong> <%= booking.ride.start_time %></p>
+        <p><strong>Start time : </strong> <%= booking.ride.start_time.strftime("%-d %b %Y, %H:%M") %></p>
         <p><strong>Price : </strong> <%= booking.ride.price %> Rs</p>
       </div>
 
