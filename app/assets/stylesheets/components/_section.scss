@@ -3,11 +3,13 @@
   align-items: center;
   justify-content: space-between;;
   margin-bottom: 5px;
-  background: #ffffff;
+  background: linear-gradient(90deg, #7161ef 0%, #957fef 53%, #b79ced 100%);
   padding: 8px 16px;
   border: 1px solid rgb(235,235,235);
 
   & h2 {
     margin: 1px;
+    // font-weight: bold;
+    font-family: 'Poppins', sans-serif;
   }
 }

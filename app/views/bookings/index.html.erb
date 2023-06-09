@@ -8,7 +8,7 @@
 
 <div>
   <% @bookings.each do |booking| %>
-    <div class="notification" >
+    <div class="notification card-rides" >
       <div class="notification-content">
         <p><strong>Driver : </strong> <%= booking.user.first_name %> - <%= booking.user.last_name %></p>
         <p><strong>Ride : </strong> from <%= booking.ride.start_location %> to <%= booking.ride.end_location %></p>

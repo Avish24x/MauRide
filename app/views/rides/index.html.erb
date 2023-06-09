@@ -2,13 +2,13 @@
   <%= link_to root_path,
     data: {turbo_method: :get} do %>
       <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
-    <% end %><hr>
+  <% end %><hr>
   <h2>Rides</h2>
 </div>
 
 <div>
   <% @rides.each do |ride| %>
-    <div class="notification" >
+    <div class="notification card-rides" >
       <div class="notification-content">
         <p><strong><%= ride.start_time.strftime("%H:%M")%></strong> <%= link_to ride_path(ride) do %>
           <strong><%= ride.start_location%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= ride.end_location%></strong></p>

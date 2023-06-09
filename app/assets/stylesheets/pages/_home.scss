@@ -27,6 +27,20 @@ body {
     // text-align: center;
 }
 
+.home-header h1 span {
+  color: #957fef;
+  text-shadow: 1px 1px 3px rgb(98, 94, 98);
+}
+
+.home-header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  // font-weight: bold;
+  padding-top: 2rem;
+  padding-left: 1rem;
+  text-shadow: 1px 1px 3px black;
+}
+
 .container-home-location {
   background: linear-gradient(90deg, #7161ef 0%, #957fef 53%, #b79ced 100%);
   border-radius: 10px;
