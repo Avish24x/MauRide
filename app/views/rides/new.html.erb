@@ -9,11 +9,12 @@
 <div class="notification" >
   <div class="notification-content">
     <%= simple_form_for @ride do |f| %>
-      <%= f.input :start_location %>
+
+      <%= f.input :start_location%>
       <%= f.input :end_location %>
       <%= f.input :ride_details %>
-      <%= f.input :start_time %>
-      <%= f.input :end_time %>
+      <%= f.input :start_time, as: :string, input_html: { data: { controller: "flatpickr" } } %>
+      <%= f.input :end_time, as: :string, input_html: { data: { controller: "flatpickr" } } %>
       <%= f.input :price %>
       <%= f.input :seats %>
       <%= f.association :vehicule, collection: Vehicule.where(user: current_user), label_method: :model %>
