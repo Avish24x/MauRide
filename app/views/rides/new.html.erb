@@ -1,17 +1,29 @@
-<%= simple_form_for @ride do |f| %>
+<div class="section">
+  <%= link_to root_path,
+    data: {turbo_method: :get} do %>
+      <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
+    <% end %><hr>
+  <h2>Create my ride</h2>
+</div>
+
+<div class="notification" >
+  <div class="notification-content">
+    <%= simple_form_for @ride do |f| %>
+
   <%= simple_fields_for :start_location do |p| %>
     <%= p.input :address %>
   <% end %>
   <%= simple_fields_for :end_location do |t| %>
       <%= t.input :address %>
   <% end %>
-
-
-  <%= f.input :ride_details %>
-  <%= f.input :start_time %>
-  <%= f.input :end_time %>
-  <%= f.input :price %>
-  <%= f.input :seats %>
-  <%= f.association :vehicule, collection: Vehicule.where(user: current_user), label_method: :model %>
-  <%= f.submit %>
-<% end %>
+    
+      <%= f.input :ride_details %>
+      <%= f.input :start_time, as: :string, input_html: { data: { controller: "flatpickr" } } %>
+      <%= f.input :end_time, as: :string, input_html: { data: { controller: "flatpickr" } } %>
+      <%= f.input :price %>
+      <%= f.input :seats %>
+      <%= f.association :vehicule, collection: Vehicule.where(user: current_user), label_method: :model %>
+      <%= f.submit class: "btn btn-flat" %>
+    <% end %>
+  </div>
+</div>

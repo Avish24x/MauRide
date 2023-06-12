@@ -1,0 +1,57 @@
+<div class="tab-bar">
+   <%= link_to root_path do %>
+      <div class="link-to-pages">
+        <span class="link-icon">
+          <!-- Home icon -->
+          <i class="fa-solid fa-house fa-xl" style="color: #670BFF;"></i>
+        </span>
+        <span class="link-title">Home</span>
+      </div>
+    <% end %>
+
+
+    <%= link_to bookings_path do %>
+      <div class="link-to-pages">
+          <span class="link-icon">
+            <!-- Booking icon -->
+            <i class="fa-solid fa-book-open fa-xl" style="color: #670BFF;"></i>
+            <!-- /icon -->
+          </span>
+          <span class="link-title">Booking</span>
+      </div>
+    <% end %>
+
+
+    <%= link_to new_ride_path do %>
+      <div class="link-to-pages">
+        <span class="link-icon">
+          <!-- Car icon -->
+          <i class="fa-solid fa-car fa-xl" style="color: #670BFF;"></i>
+          <!-- /icon -->
+        </span>
+        <span class="link-title">Add Ride</span>
+      </div>
+    <% end %>
+
+    <%= link_to root_path do %>
+      <div class="link-to-pages">
+        <span class="link-icon">
+          <!-- Message icon -->
+          <i class="fa-solid fa-message fa-xl" style="color: #670BFF;"></i>
+          <!-- /icon -->
+        </span>
+        <span class="link-title">Message</span>
+      </div>
+    <% end %>
+
+    <%= link_to edit_user_registration_path do %>
+      <div class="link-to-pages">
+        <span class="link-icon">
+          <!-- Profile icon -->
+          <i class="fa-solid fa-user fa-xl" style="color: #670BFF;"></i>
+          <!-- /icon -->
+        </span>
+        <span class="link-title">Profile</span>
+      </div>
+    <% end %>
+</div>
