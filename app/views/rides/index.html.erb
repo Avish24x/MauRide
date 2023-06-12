@@ -14,9 +14,12 @@
         <p><strong><%= ride.start_time.strftime("%H:%M")%></strong> <%= link_to ride_path(ride) do %>
           <strong><%= ride.start_location.address%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= ride.end_location.address%></strong></p>
         <% end %><hr>
-        <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= ride.price %></strong></p>
+        <div class="space_between">
+          <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= ride.price %></strong></p>
+          <%= cl_image_tag ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %>
+        </div>
+
       </div>
     </div>
   <% end %>
 </div>
-
