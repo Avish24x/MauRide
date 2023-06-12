@@ -1,14 +1,22 @@
-<h1>this is the user show page</h1>
-<%= link_to "Back", root_path %>
+<div class="section">
+  <%= link_to root_path,
+    data: {turbo_method: :get} do %>
+      <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
+    <% end %><hr>
+  <h2>Profile</h2>
+</div>
 
 <div class="notification">
+   <%# cl_image_tag @user.photo.key %>
   <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
   <div class="notification-content">
     <p><strong><%= @user.first_name %> <%= @user.last_name %></strong></p>
   </div>
 
-  <%# ajouter les liens des actions à faire %>
+  <%# a afficher que si user = dirver %>
   <div class="notification-actions">
+
+  <%# edit_user_registration_path %>
     <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
     <a href="#">Delete <i class="far fa-trash-alt"></i></a>
   </div>

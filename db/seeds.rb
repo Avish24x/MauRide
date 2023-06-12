@@ -34,12 +34,11 @@ User.create(
   phone_number: Faker::PhoneNumber.cell_phone_in_e164,
   payment_details: Faker::Finance.credit_card,
   rating: rand(0..5),
-  account_status: "user",
-  location: "Port-Louis"
+  account_status: "user"
 )
 
 puts "creation d'un passenger"
-passenger_seed = User.create(
+  passenger_seed = User.create(
   email: Faker::Internet.email,
   password: "FF1234",
   first_name: Faker::Name.first_name,
