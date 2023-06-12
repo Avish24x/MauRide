@@ -8,13 +8,13 @@
 
 <div>
   <% @rides.each do |ride| %>
+
     <div class="notification card-rides" >
       <div class="notification-content">
         <p><strong><%= ride.start_time.strftime("%H:%M")%></strong> <%= link_to ride_path(ride) do %>
-          <strong><%= ride.start_location%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= ride.end_location%></strong></p>
+          <strong><%= ride.start_location.address%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= ride.end_location.address%></strong></p>
         <% end %><hr>
         <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= ride.price %></strong></p>
-        <%# seats available = rides.seats - booking.booked_seats %>
       </div>
     </div>
   <% end %>
