@@ -1,32 +1,33 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
 require 'faker'
-require "open-uri"
+require 'open-uri'
 
-VILLE = %w[Port-Louis	Beau-Bassin Rose-Hill	Vacoas-Phœnix	Curepipe Quatre-Bornes Trou-aux-Biches
-Goodlands Centre-de-Flacq Bel-Air Mahébourg	Saint-Pierre	Le-Hochet	Baie-du-Tombeau	Bambous	Rose-Belle
-Chemin-Grenier	Rivière-du-Rempart	Grand-Baie	Plaine-Magnien	Pailles	Surinam	Lalmatie	New-Grove
-Rivière-des-Anguilles	Terre-Rouge	Petit-Raffray	Moka Pamplemousses Montagne-Blanche	L'Escalier]
+VILLE = [
+  { name: 'Port-Louis', latitude: -20.1606, longitude: 57.4989 },
+  { name: 'Grand Baie', latitude: -20.0063, longitude: 57.5816 },
+  { name: 'Flic-en-Flac', latitude: -20.2807, longitude: 57.3605 },
+  { name: 'Le Morne Brabant', latitude: -20.4386, longitude: 57.3219 },
+  { name: 'Trou aux Biches', latitude: -20.0378, longitude: 57.5477 },
+  { name: 'Belle Mare', latitude: -20.1890, longitude: 57.7623 },
+  { name: 'Black River Gorges National Park', latitude: -20.4305, longitude: 57.4046 },
+  { name: 'Chamarel', latitude: -20.4281, longitude: 57.3742 },
+  { name: 'Tamarin', latitude: -20.3191, longitude: 57.3706 },
+  { name: 'Mahebourg', latitude: -20.4087, longitude: 57.7002 }
+]
 
-Vehicule.destroy_all
-puts "deleted all Vehicule"
-Review.destroy_all
-puts "deleted all Review"
-Booking.destroy_all
-puts "deleted all booking"
-Ride.destroy_all
-puts "deleted all rides"
-User.destroy_all
-puts "deleted all user"
+puts "Deleting existing data..."
+Review.delete_all
+Booking.delete_all
+StartLocation.delete_all
+EndLocation.destroy_all
+Ride.delete_all
+Vehicule.delete_all
+User.delete_all
+
+puts "Creating users..."
 
 User.create(
-  email:'test@gmail.com',
-  password: "password",
+  email: 'test@gmail.com',
+  password: 'password',
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   age: rand(18..60),
@@ -34,14 +35,13 @@ User.create(
   phone_number: Faker::PhoneNumber.cell_phone_in_e164,
   payment_details: Faker::Finance.credit_card,
   rating: rand(0..5),
-  account_status: "user",
-  location: "Port-Louis"
+  account_status: 'user'
 )
 
-puts "creation d'un passenger"
+# Create a passenger user
 passenger_seed = User.create(
   email: Faker::Internet.email,
-  password: "FF1234",
+  password: 'FF1234',
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   age: rand(18..60),
@@ -49,15 +49,15 @@ passenger_seed = User.create(
   phone_number: Faker::PhoneNumber.cell_phone_in_e164,
   payment_details: Faker::Finance.credit_card,
   rating: rand(0..5),
-  account_status: "user"
+  account_status: 'user'
 )
-passenger_seed.save
+puts "Created a passenger user."
 
-puts "creation de plusieurs drivers"
+# Create multiple driver users
 3.times do
   driver_seed = User.create(
     email: Faker::Internet.email,
-    password: "FF1234",
+    password: 'FF1234',
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     age: rand(18..60),
@@ -65,50 +65,49 @@ puts "creation de plusieurs drivers"
     phone_number: Faker::PhoneNumber.cell_phone_in_e164,
     payment_details: Faker::Finance.credit_card,
     rating: rand(0..5),
-    account_status: "driver"
+    account_status: 'driver'
   )
-  driver_seed.save
+  puts "Created a driver user."
 
-  puts "creation d'une voiture pour le driver"
+  puts "Creating a vehicle for the driver..."
   vehicule_seed = Vehicule.create(
     model: Faker::Vehicle.make_and_model,
     registration_detail: Faker::Vehicle.standard_specs,
     user_id: driver_seed.id
   )
+  puts "Created a vehicle for the driver."
 
-  puts "creation de 1 à 3 rides par driver"
+  puts "Creating rides for the driver..."
   rand(1..3).times do
     ville_start = VILLE.sample
-    ville_end = VILLE.excluding(ville_start).sample
-    # ville_end = VILLE.sample,
+    ville_end = VILLE.reject { |v| v[:name] == ville_start[:name] }.sample
+
+    start_location = StartLocation.create(
+      latitude: ville_start[:latitude],
+      longitude: ville_start[:longitude],
+      address: ville_start[:name]
+    )
+
+    end_location = EndLocation.create(
+      latitude: ville_end[:latitude],
+      longitude: ville_end[:longitude],
+      address: ville_end[:name]
+    )
+
     ride_seed = Ride.create(
-      start_location: ville_start,
-      end_location: ville_end,
-      ride_details: Faker::Vehicle.standard_specs,
-      distance: rand(1..61),
-      start_time: Faker::Time.between(from: DateTime.now, to: DateTime.now + 1, format: :short),
-      end_time: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 2, format: :short),
-      price: rand(100..1000),
+      start_location: start_location,
+      end_location: end_location,
+      ride_details: Faker::Lorem.sentence,
+      distance: rand(1..50),
+      start_time: Faker::Time.between_dates(from: Date.today - 7, to: Date.today, period: :all),
+      end_time: Faker::Time.between_dates(from: Date.today, to: Date.today + 7, period: :all),
+      price: rand(10..100),
       seats: rand(1..4),
       vehicule_id: vehicule_seed.id
     )
 
-    puts "creation d'un booking par ride"
-    Booking.create(
-      ride_id: ride_seed.id,
-      user_id: driver_seed.id
-    )
-
-    puts "creation d'1 à 4 review par ride"
-    # les reviews sont créees par un seul user(passenger pour l'instant)
-    rand(0..4).times do
-      Review.create(
-        rating: rand(0..5),
-        comment: Faker::Quote.matz,
-        timestamp: Time.now,
-        user_id: passenger_seed.id,
-        ride_id: ride_seed.id
-      )
-    end
+    puts "Created a ride with id: #{ride_seed.id}"
   end
 end
+
+puts "Seeding completed successfully!"

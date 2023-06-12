@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_07_211622) do
-
-
+ActiveRecord::Schema[7.0].define(version: 2023_06_08_223709) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +22,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_211622) do
     t.integer "booked_seats"
     t.index ["ride_id"], name: "index_bookings_on_ride_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "end_locations", force: :cascade do |t|
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
+    t.bigint "ride_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ride_id"], name: "index_end_locations_on_ride_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -49,11 +57,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_211622) do
     t.integer "seats"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "latitude"
-    t.float "longitude"
     t.bigint "vehicule_id", null: false
     t.index ["vehicule_id"], name: "index_rides_on_vehicule_id"
+  end
 
+  create_table "start_locations", force: :cascade do |t|
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
+    t.bigint "ride_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ride_id"], name: "index_start_locations_on_ride_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -89,8 +104,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_211622) do
 
   add_foreign_key "bookings", "rides"
   add_foreign_key "bookings", "users"
+  add_foreign_key "end_locations", "rides"
   add_foreign_key "reviews", "rides"
   add_foreign_key "reviews", "users"
   add_foreign_key "rides", "vehicules"
+  add_foreign_key "start_locations", "rides"
   add_foreign_key "vehicules", "users"
 end

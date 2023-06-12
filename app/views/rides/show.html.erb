@@ -5,10 +5,15 @@
 ride_path(@ride),
 data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
 %>
+<div data-controller="rides-map" data-rides-map-api-key-value="YOUR_API_KEY" data-rides-map-marker-value='[{"lng": <%= @start_location.longitude %>, "lat": <%= @start_location.latitude %>}, {"lng": <%= @end_location.longitude %>, "lat": <%= @end_location.latitude %>}]'>
+
 <div style="width: 100%; height: 600px;"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+</div>
+
 
 <h2>Reviews</h2>
 <% @ride.reviews.each do |review| %>
