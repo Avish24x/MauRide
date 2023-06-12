@@ -35,11 +35,12 @@ User.create(
   phone_number: Faker::PhoneNumber.cell_phone_in_e164,
   payment_details: Faker::Finance.credit_card,
   rating: rand(0..5),
-  account_status: 'user'
+  account_status: "user"
 )
 
-# Create a passenger user
-passenger_seed = User.create(
+puts "creation d'un passenger"
+  passenger_seed = User.create(
+
   email: Faker::Internet.email,
   password: 'FF1234',
   first_name: Faker::Name.first_name,

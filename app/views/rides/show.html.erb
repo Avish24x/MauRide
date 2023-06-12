@@ -23,6 +23,7 @@
       <p><strong>End time : </strong><%= @ride.end_time.strftime("%-d %b %Y, %H:%M") %></p>
       <p><strong>Price : </strong><%= @ride.price %> Rs</p>
       <p><strong>Details : </strong><%= @ride.ride_details %></p>
+      <p><%= link_to "Driver's profile", user_path(@ride.vehicule.user) %></p>
       <%# seats available = rides.seats - booking.booked_seats %>
 
       <%= simple_form_for [@ride, @booking] do |form| %>
