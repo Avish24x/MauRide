@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_06_12_121933) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_121933) do
     t.index ["ride_id"], name: "index_bookings_on_ride_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
-
+  
   create_table "chatrooms", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -75,6 +76,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_121933) do
     t.datetime "updated_at", null: false
     t.index ["chatroom_id"], name: "index_participants_on_chatroom_id"
     t.index ["user_id"], name: "index_participants_on_user_id"
+
+  create_table "end_locations", force: :cascade do |t|
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
+    t.bigint "ride_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ride_id"], name: "index_end_locations_on_ride_id"
+
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -101,9 +112,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_121933) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "vehicule_id", null: false
+    t.index ["vehicule_id"], name: "index_rides_on_vehicule_id"
+  end
+
+  create_table "start_locations", force: :cascade do |t|
     t.float "latitude"
     t.float "longitude"
-    t.index ["vehicule_id"], name: "index_rides_on_vehicule_id"
+    t.string "address"
+    t.bigint "ride_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ride_id"], name: "index_start_locations_on_ride_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -141,12 +160,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_121933) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "rides"
   add_foreign_key "bookings", "users"
+
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
   add_foreign_key "participants", "chatrooms"
   add_foreign_key "participants", "users"
+
+  add_foreign_key "end_locations", "rides"
+
   add_foreign_key "reviews", "rides"
   add_foreign_key "reviews", "users"
   add_foreign_key "rides", "vehicules"
+  add_foreign_key "start_locations", "rides"
   add_foreign_key "vehicules", "users"
 end

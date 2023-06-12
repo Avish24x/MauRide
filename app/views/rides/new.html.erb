@@ -10,8 +10,13 @@
   <div class="notification-content">
     <%= simple_form_for @ride do |f| %>
 
-      <%= f.input :start_location%>
-      <%= f.input :end_location %>
+  <%= simple_fields_for :start_location do |p| %>
+    <%= p.input :address %>
+  <% end %>
+  <%= simple_fields_for :end_location do |t| %>
+      <%= t.input :address %>
+  <% end %>
+    
       <%= f.input :ride_details %>
       <%= f.input :start_time, as: :string, input_html: { data: { controller: "flatpickr" } } %>
       <%= f.input :end_time, as: :string, input_html: { data: { controller: "flatpickr" } } %>
