@@ -21,7 +21,7 @@
         <%= f.input :payment_details %>
         <%= f.input :photo, as: :file %>
       </div>
-      <%= cl_image_tag @user.photo.key, height: 300, width: 400, crop: :fill %>
+      <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
     </div>
 
     <div class="notification">
