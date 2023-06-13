@@ -9,13 +9,16 @@ class VehiculesController < ApplicationController
 
   def new
     @vehicule = Vehicule.new
+    @vehicules = Vehicule.where(user: current_user)
   end
 
   def create
     @vehicule = Vehicule.new(vehicule_params)
     @vehicule.user = current_user
     if @vehicule.save
-      redirect_to vehicules_path(@vehicule)
+      # redirect_to vehicules_path(@vehicule)
+      redirect_to new_ride_path(@vehicule)
+
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,7 +27,7 @@ class VehiculesController < ApplicationController
   def destroy
     @vehicule = Vehicule.find(params[:id])
     @vehicule.destroy
-    redirect_to vehicules_path, status: :see_other
+    redirect_to new_vehicule_path, status: :see_other
   end
 
   private
