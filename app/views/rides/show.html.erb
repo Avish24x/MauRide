@@ -14,14 +14,14 @@
   </div>
 </div>
 
-<div>
+<div class="rides-profile-card">
   <div class="notification">
     <%# attention, si on rajoute une ligen ici, ca fait une colonne dans page  %>
-    <div class="notification-content">
+    <div class="notification-content-rides">
       <h2><strong><%= @ride.start_location.address%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= @ride.end_location.address%></strong></h2>
       <p><strong>Start time : </strong><%= @ride.start_time.strftime("%-d %b %Y, %H:%M") %></p>
       <p><strong>End time : </strong><%= @ride.end_time.strftime("%-d %b %Y, %H:%M") %></p>
-      <p><strong>Price : </strong><%= @ride.price %> Rs</p>
+      <p><strong>Price : </strong>Rs <%= @ride.price %></p>
       <p><strong>Details : </strong><%= @ride.ride_details %></p>
 
       <%# on affiche la photo du driver pour acceder à son profil %>
@@ -50,8 +50,8 @@
   </div>
 </div>
 
-<div>
-  <h2>Add Review</h2>
+<div class="rides-profile-card">
+  <h2 class="review-ride-title"><strong>Add Review</strong></h2>
   <div class="notification">
     <div class="notification-content">
       <%= simple_form_for [@ride, @review] do |f| %>

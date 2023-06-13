@@ -1,5 +1,5 @@
 <div class="section">
-  <%= link_to root_path,
+  <%= link_to rides_path,
     data: {turbo_method: :get} do %>
       <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
     <% end %><hr>
@@ -7,7 +7,7 @@
 </div>
 
 <%# public infos %>
-<div class="notification">
+<div class="notification user-card">
   <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
   <div class="notification-content">
     <p><strong><%= @user.first_name %> <%= @user.last_name %></strong></p>
@@ -31,11 +31,11 @@
 
 <%# private infos %>
 <% if current_user == @user %>
-  <div class="notification">
-    <p><i class="fa-solid fa-location-dot fa-xl" style="color: #000000;"></i> <%= @user.location %></p>
+  <div class="notification user-card">
+    <p><i class="fa-solid fa-location-dot fa-l" style="color: #000000;"></i> <%= @user.location %></p>
     <div class="notification-content">
-      <p><i class="fa-solid fa-envelope fa-xl" style="color: #000000;"></i> <%= @user.email %></p>
-      <p><i class="fa-solid fa-mobile-screen-button fa-xl" style="color: #000000;"></i> <%= @user.phone_number %></p>
+      <p><i class="fa-solid fa-envelope fa-l" style="color: #000000;"></i> <%= @user.email %></p>
+      <p><i class="fa-solid fa-mobile-screen-button fa-l" style="color: #000000;"></i> <%= @user.phone_number %></p>
     </div>
   </div>
 <% end %>
