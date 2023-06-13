@@ -14,19 +14,19 @@
 
 
 <%# on peut enregistrer un ride QUE si voitures.all NON VIDE %>
-<div class="notification" >
-  <div class="notification-content">
-    <%= simple_form_for @ride do |f| %>
-      <div class="space_between">
-        <p><%= f.association :vehicule, collection: Vehicule.where(user: current_user), label_method: :model %>
-        </p>
 
-        <%= link_to new_vehicule_path,data: {turbo_method: :get} do %>
-          <i class="fa-solid fa-circle-plus fa-xl" style="color: #670bff;"></i>
-        <% end %>
-      </div>
+<%= simple_form_for @ride do |f| %>
+  <div class="notification" >
+
+    <div class="notification-content">
+      <%= f.association :vehicule, collection: Vehicule.where(user: current_user), label_method: :model, prompt: "Choose a vehicle"%>
     </div>
-</div>
+
+    <%= link_to new_vehicule_path,data: {turbo_method: :get} do %>
+      <i class="fa-solid fa-circle-plus fa-2xl" style="color: #670bff;"></i>
+    <% end %>
+
+  </div>
 
 <div class="notification" >
   <div class="notification-content">
