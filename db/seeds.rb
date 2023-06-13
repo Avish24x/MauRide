@@ -49,22 +49,6 @@ User.delete_all
 
 puts "Creating users..."
 
-elodie = User.create(
-  email: 'elodie@gmail.com',
-  password: 'password',
-  first_name: "Elodie",
-  last_name: "LEZARD",
-  age: 19,
-  location: Faker::Address.full_address,
-  phone_number: Faker::PhoneNumber.cell_phone_in_e164,
-  payment_details: Faker::Finance.credit_card,
-  rating: rand(0..5)
-)
-file = URI.open("https://media.cnn.com/api/v1/images/stellar/prod/210722150743-ryan-reynolds-file-restricted.jpg?q=x_3,y_0,h_1684,w_2993,c_crop/h_540,w_960/f_webp")
-elodie.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
-elodie.save
-puts "created elodie photo"
-
 lea = User.create(
   email: 'lea@gmail.com',
   password: 'password',
@@ -105,7 +89,7 @@ puts "crating 4 drivers"
   puts "Creating a vehicle for the driver..."
   vehicule_seed = Vehicule.create(
     model: Faker::Vehicle.make_and_model,
-    registration_detail: Faker::Vehicle.license_plate,
+    registration_detail: Faker::Vehicle.standard_specs,
     user_id: driver_seed.id
   )
   puts "Created a vehicle for the driver."
