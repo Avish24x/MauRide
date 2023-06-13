@@ -41,6 +41,30 @@
 <% end %>
 
 
+<h2>Vehicles</h2>
+<div>
+<%# on affiche les voitures de chaque driver %>
+  <% @user.vehicules.each do |vehicule| %>
+    <div class="notification" >
+      <div class="notification-content">
+        <p>Model : <%= vehicule.model %></p>
+        <p>Registration details : <%= vehicule.registration_detail %></p>
+      </div>
+
+      <%# on affiche icone poubelle si c'est notre voiture %>
+      <% if current_user == vehicule.user %>
+        <div class="notification-actions">
+          <%= link_to user_path(current_user),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %><hr>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
 <%# On affiche review QUE s'il existe des reviews aux rides %>
 <div>
   <h2>Reviews</h2>
