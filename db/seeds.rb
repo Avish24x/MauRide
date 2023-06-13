@@ -150,7 +150,7 @@ puts "Created a passenger user."
       rating: rand(0..5),
       comment: Faker::Quote.matz,
       timestamp: Time.now,
-      user_id: passenger_seed.id,
+      user_id: passenger_seed.id, #le review appartient au passager
       ride_id: ride_seed.id
     )
   end
