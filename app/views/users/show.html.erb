@@ -7,10 +7,7 @@
 </div>
 
 <div class="notification">
-  <div class="avatar-large">
-    <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
-  </div>
-
+  <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
   <div class="notification-content">
     <p><strong><%= @user.first_name %> <%= @user.last_name %></strong></p>
   </div>
@@ -54,8 +51,8 @@
   <% else %>
     <%  @user.vehicules.map(&:rides)[0].map(&:reviews)[0].each do |review| %>
       <div class="notification">
-        <%# on affiche le createur de la review (image wagon pour l'instant) %>
-        <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+        <%# on affiche le createur de la review %>
+        <%= cl_image_tag review.user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
         <div class="notification-content">
           <p><small><%= time_ago_in_words(review.timestamp) %></small></p>
           <p><strong>Rating:</strong><% review.rating.to_i.times do  %>
