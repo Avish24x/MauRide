@@ -1,0 +1,12 @@
+<% @rides.flatten.each do |ride| %>
+    <div class="notification" >
+      <div class="notification-content">
+        <p><strong>Price : </strong> <%= ride.price %> Rs</p>
+      </div>
+    </div>
+<% end %>
+
+<%= link_to rides_path,
+          data: {turbo_method: :get} do %>
+            <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
+          <% end %><hr>

@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   end
   resources :reviews, only: [:destroy]
   resources :bookings, only: %i[destroy index]
+  get "driver_bookings", to: "bookings#driver_bookings"
 end

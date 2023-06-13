@@ -21,6 +21,22 @@ class BookingsController < ApplicationController
   def show
   end
 
+  def driver_bookings
+    @rides = current_user.vehicules.map(&:rides)
+  end
+
+  def update
+    if @booking.update_attributes(booking_params)
+      flash[:success] = "booking updated"
+      redirect_to @booking
+    else
+      render 'edit'
+    end
+  end
+
+  def edit
+  end
+
   def destroy
     @booking = Booking.find(params[:id])
     @booking.destroy
@@ -30,10 +46,18 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:user_id, :ride_id, :booked_seats)
+    params.require(:booking).permit(:user_id, :ride_id, :booked_seats, :booking_status)
   end
 
-  def my_booking
-    
+  def approve
+    if @booking_status.nil?
+      return 'booking pending'
+    elsif @booking_status == true
+      flash[:success] = "Booking successfully approved"
+      return 'booking approved'
+    else
+      flash[:error] = "Booking not approved"
+      return 'booking decline'
+    end
   end
 end
