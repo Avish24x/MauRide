@@ -2,7 +2,7 @@
 
 <div>
   <% @rides.each do |ride| %>
-    <p><%= link_to "Ride from #{ride.start_location} to #{ride.end_location}", ride_path(ride) %></p>
+    <p><%= link_to "Ride from #{ride.start_location.address} to #{ride.end_location.address}", ride_path(ride) %></p>
     <p><strong>Start time : </strong> <%= ride.start_time %></p>
     <p><strong>Price : </strong> <%= ride.price %> Rs</p>
     <%# seats available = rides.seats - booking.booked_seats %>

@@ -1,11 +1,9 @@
 <%= simple_form_for @ride do |f| %>
   <%= simple_fields_for :start_location do |p| %>
-    <%= p.input :longitude %>
-    <%= p.input :latitude %>
+    <%= p.input :address %>
   <% end %>
   <%= simple_fields_for :end_location do |t| %>
-    <%= t.input :longitude %>
-    <%= t.input :latitude %>
+      <%= t.input :address %>
   <% end %>
 
 
@@ -17,11 +15,3 @@
   <%= f.association :vehicule, collection: Vehicule.where(user: current_user), label_method: :model %>
   <%= f.submit %>
 <% end %>
-<div data-controller="rides-map" data-rides-map-api-key-value=pk.eyJ1IjoiYXZpc2gyNCIsImEiOiJjbGhzejJtMGowNjZyM2NuM3Vzd3p1eGc3In0.ushLocik3rgJ2_Wb1vuDpw data-rides-map-marker-value='[{"lng": <%= @start_location.longitude %>, "lat": <%= @start_location.latitude %>}, {"lng": <%= @end_location.longitude %>, "lat": <%= @end_location.latitude %>}]'>
-
-<div style="width: 100%; height: 600px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div>
-</div>

@@ -16,12 +16,14 @@ class RidesController < ApplicationController
       {
         position: 'start',
         lat: @start_location.latitude,
-        lng: @start_location.longitude
+        lng: @start_location.longitude,
+        location: @start_location.address
       },
       {
         position: 'finish',
         lat: @end_location.latitude,
-        lng: @end_location.longitude
+        lng: @end_location.longitude,
+        location: @end_location.address
       }
     ]
 
@@ -37,11 +39,14 @@ class RidesController < ApplicationController
     @ride = Ride.new(ride_params)
 
     @start_location = StartLocation.new(start_location_params)
+    @start_location.save
     @end_location = EndLocation.new(end_location_params)
+    @end_location.save
 
-    if @ride.save && @start_location.save && @end_location.save
-      @ride.start_location = @start_location
-      @ride.end_location = @end_location
+    @ride.start_location = @start_location
+    @ride.end_location = @end_location
+
+    if @ride.save
 
       redirect_to ride_path(@ride), notice: 'Ride was successfully created.'
     else
@@ -61,20 +66,20 @@ class RidesController < ApplicationController
   def ride_params
     params.require(:ride).permit(
       :address, :ride_details, :start_time, :end_time, :price, :seats, :vehicule_id,
-      start_location_attributes: [:latitude, :longitude],
-      end_location_attributes: [:latitude, :longitude]
+      start_location_attributes: [:address],
+      end_location_attributes: [:address]
     )
   end
 
   def start_location_params
     params.require(:start_location).permit(
-      :latitude, :longitude
+      :address
   )
   end
 
   def end_location_params
     params.require(:end_location).permit(
-      :latitude, :longitude
+      :address
     )
 
   end
