@@ -11,7 +11,7 @@
 
   <div class="form-inputs">
 
-    <div class="notification">
+    <div class="notification user-edit-card">
       <div class="notification-content">
         <%= f.input :first_name %>
         <%= f.input :last_name %>
@@ -24,7 +24,7 @@
       <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
     </div>
 
-    <div class="notification">
+    <div class="notification user-edit-card">
       <div class="notification-content">
 
         <%= f.input :email, required: true, autofocus: true %>
@@ -49,18 +49,14 @@
 
   </div>
 
-  <div class="notification">
-    <div class="notification-content">
-      <div class="form-actions">
+      <div class="form-actions button-update">
         <%= f.button :submit, "Update my profile", class: "btn btn-flat" %>
       </div>
-    </div>
-  </div>
 
 <% end %>
 
-<div class="notification">
+<%# <div class="notification">
   <div class="notification-content">
     <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-flat" %></div>
-  </div>
-</div>
+  <%# </div>
+</div> %>

@@ -16,7 +16,7 @@
 <%# on peut enregistrer un ride QUE si voitures.all NON VIDE %>
 
 <%= simple_form_for @ride do |f| %>
-  <div class="notification" >
+  <div class="notification add-rides" >
 
     <div class="notification-content">
       <%= f.association :vehicule, collection: Vehicule.where(user: current_user), label_method: :model, prompt: "Choose a vehicle"%>
@@ -28,7 +28,7 @@
 
   </div>
 
-<div class="notification" >
+<div class="notification add-rides" >
   <div class="notification-content">
       <%= simple_fields_for :start_location do |p| %>
         <%= p.input :address, label: "Start location" %>
