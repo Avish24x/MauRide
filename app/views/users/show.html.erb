@@ -7,14 +7,12 @@
 </div>
 
 <div class="notification">
-  <div class="avatar-large">
-    <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
-  </div>
-
+  <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
   <div class="notification-content">
     <p><strong><%= @user.first_name %> <%= @user.last_name %></strong></p>
   </div>
 
+ <%# on affiche les butons edit et delete que si on est le user %>
  <% if current_user == @user %>
     <div class="notification-actions">
       <%= link_to edit_user_registration_path, data: {turbo_method: :get} do %>
@@ -27,31 +25,52 @@
       <% end %>
     </div>
   <% end %>
-
 </div>
 
-<div>
-<h2>My Bookings</h2>
-  <div class="notification" >
-    <div class="notification-content">
-      <h3>Planning</h3>
-      <h3>Previews rides</h3>
+<%# on affiche les bookings que si on est le user %>
+ <% if current_user == @user %>
+  <div>
+  <h2>My Bookings</h2>
+    <div class="notification" >
+      <div class="notification-content">
+        <h3>Planning</h3>
+        <h3>Previews rides</h3>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
+
+<%# On affiche review QUE s'il existe des reviews aux rides %>
 
 <div>
   <h2>Reviews</h2>
-  <div class="notification" >
-    <div class="notification-content">
-      <% @user.reviews.each do |review| %>
-        <p><strong>Rating:</strong> <%= review.rating %></p>
-        <p><strong>Comment:</strong> <%= review.comment %></p>
-        <p><strong><%= time_ago_in_words(review.timestamp) %></strong></p>
-
-        <%= link_to "Delete review", ride_review_path(@ride, review),
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%><hr>
-      <% end %>
+  <% if @reviews.nil? %>
+    <div class="notification">
+    <p>No reviews yet</p>
     </div>
-  </div>
+  <% else %>
+    <%  @user.vehicules.map(&:rides)[0].map(&:reviews)[0].each do |review| %>
+      <div class="notification">
+        <%# on affiche le createur de la review %>
+        <%= cl_image_tag review.user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
+        <div class="notification-content">
+          <p><small><%= time_ago_in_words(review.timestamp) %></small></p>
+          <p><strong>Rating:</strong><% review.rating.to_i.times do  %>
+            <i class="fa-solid fa-star" style="color: #ffc65a;"></i>
+            <% end %></p>
+          <p><strong>Comment:</strong> <%= review.comment %></p>
+        </div>
+
+        <%# on affiche icone poubelle  %>
+        <div class="notification-actions">
+          <% if current_user == review.user %>
+            <%= link_to user_path(@user),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %><hr>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>

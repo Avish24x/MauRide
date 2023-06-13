@@ -14,7 +14,8 @@ VILLE = [
   { name: 'Mahebourg', latitude: -20.4087, longitude: 57.7002 }
 ]
 
-images = [
+images_drivers = [
+  "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709266/12db5a981fb89864eee3cc19445493dc_lb9d8v.jpg",
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709559/michael-dam-mEZ3PoFGs_k-unsplash_x8tzt6.jpg",
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709269/d222f555b4b52852aa154cbde8d10d5f_caxeux.jpg",
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709268/d8d6410ae0c317178e1318f4ca97ea21_yw9spx.jpg",
@@ -22,6 +23,9 @@ images = [
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709268/ca1d3c06d5e8554a992201ea492dfe12_vjveut.jpg",
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709267/81159f3a28fd2485583af22bb9ccbaa3_uu2pon.jpg",
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709268/a4c4c4b69fefdde32120eeb8f8e4a868_kmaatt.jpg",
+]
+
+images_passengers = [
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709267/1956fdd05b46365e97637c6e365ed1e8_mqz5i8.jpg",
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709268/c69866f67f2a18b4174c0234cea6091e_nxqis0.jpg",
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709266/18aa589555075bb52b5cf7bdffcb8303_urh45w.jpg",
@@ -45,31 +49,27 @@ User.delete_all
 
 puts "Creating users..."
 
-user_test = User.create(
-  email: 'test@gmail.com',
+lea = User.create(
+  email: 'lea@gmail.com',
   password: 'password',
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  age: rand(18..60),
+  first_name: "Léa",
+  last_name: "DRAGON",
+  age: 27,
   location: Faker::Address.full_address,
   phone_number: Faker::PhoneNumber.cell_phone_in_e164,
   payment_details: Faker::Finance.credit_card,
   rating: rand(0..5)
 )
-file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709266/12db5a981fb89864eee3cc19445493dc_lb9d8v.jpg")
-user_test.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
-puts "created user_test photo"
-user_test.save
+file = URI.open("https://avatars.githubusercontent.com/u/130605590?v=4")
+lea.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
+lea.save
+puts "created lea photo"
 
-
-
-
-puts "Created a passenger user."
-# Create multiple driver users
-3.times do |index|
+puts "crating 4 drivers"
+4.times do |index|
   driver_seed = User.create(
     email: Faker::Internet.email,
-    password: 'FF1234',
+    password: 'password',
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     age: rand(18..60),
@@ -81,7 +81,7 @@ puts "Created a passenger user."
   puts "Created a driver user."
 
   puts "Adding a photo"
-  file = URI.open(images[index])
+  file = URI.open(images_drivers[index])
   driver_seed.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
   puts "created driver photo"
   driver_seed.save
@@ -120,39 +120,42 @@ puts "Created a passenger user."
   )
   puts "Created a ride with id: #{ride_seed.id}"
 
-  # Create a passenger user
-  passenger_seed = User.create(
-    email: Faker::Internet.email,
-    password: 'password',
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    age: rand(18..60),
-    location: Faker::Address.full_address,
-    phone_number: Faker::PhoneNumber.cell_phone_in_e164,
-    payment_details: Faker::Finance.credit_card,
-    rating: rand(0..5)
-  )
-  file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709266/18aa589555075bb52b5cf7bdffcb8303_urh45w.jpg")
-  passenger_seed.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
-  puts "created passenger_seed photo"
-  passenger_seed.save
+  # Create 1 or 2 passengers
+  rand(1..2).times do
+    passenger_seed = User.create(
+      email: Faker::Internet.email,
+      password: 'password',
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      age: rand(18..60),
+      location: Faker::Address.full_address,
+      phone_number: Faker::PhoneNumber.cell_phone_in_e164,
+      payment_details: Faker::Finance.credit_card,
+      rating: rand(0..5)
+      )
+    file = URI.open(images_passengers[index])
+    passenger_seed.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
+    puts "created passenger_seed photo"
+    passenger_seed.save
 
-  puts "creation d'un booking par ride"
-  Booking.create(
-    ride_id: ride_seed.id,
-    user_id: passenger_seed.id
-  )
+    puts "creation d'un booking par ride"
+    rand(0..2).times do
+      Booking.create(
+      ride_id: ride_seed.id,
+      user_id: passenger_seed.id
+      )
+    end
 
-  puts "creation d'1 à 2 review par ride"
-  # les reviews sont créees par un seul user(passenger pour l'instant)
-  rand(0..2).times do
-    Review.create(
-      rating: rand(0..5),
-      comment: Faker::Quote.matz,
-      timestamp: Time.now,
-      user_id: passenger_seed.id,
-      ride_id: ride_seed.id
-    )
+    puts "creation d'0 à 1 review par ride par passager"
+    rand(0..1).times do
+      Review.create(
+        rating: rand(0..5),
+        comment: Faker::Quote.matz,
+        timestamp: Time.now,
+        user_id: passenger_seed.id, #le review appartient au passager
+        ride_id: ride_seed.id
+      )
+    end
   end
 end
 puts "Seeding completed successfully!"
