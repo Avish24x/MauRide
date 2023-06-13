@@ -6,7 +6,9 @@
   <h2>Profile</h2>
 </div>
 
-<%# public infos %>
+<div class="section-blanche" >
+  <h2>Personnal information</h2>
+</div>
 <div class="notification user-card">
   <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
   <div class="notification-content">
@@ -41,11 +43,14 @@
 <% end %>
 
 
-<h2>Vehicles</h2>
+<div class="section-blanche">
+  <h2>Vehicles</h2>
+</div>
+
 <div>
 <%# on affiche les voitures de chaque driver %>
   <% @user.vehicules.each do |vehicule| %>
-    <div class="notification" >
+    <div class="notification user-card" >
       <div class="notification-content">
         <p>Model : <%= vehicule.model %></p>
         <p>Registration details : <%= vehicule.registration_detail %></p>
@@ -67,14 +72,16 @@
 
 <%# On affiche review QUE s'il existe des reviews aux rides %>
 <div>
+ <div class="section-blanche">
   <h2>Reviews</h2>
+</div>
   <% if @reviews.nil? || @reviews.empty? %>
-    <div class="notification">
+    <div class="notification user-card">
     <p>No reviews yet</p>
     </div>
   <% else %>
     <%  @user.vehicules.map(&:rides)[0].map(&:reviews)[0].each do |review| %>
-      <div class="notification">
+      <div class="notification user-card">
         <%# on affiche le createur de la review %>
         <%= cl_image_tag review.user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
         <div class="notification-content">
