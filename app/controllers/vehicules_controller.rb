@@ -9,13 +9,16 @@ class VehiculesController < ApplicationController
 
   def new
     @vehicule = Vehicule.new
+    @vehicules = Vehicule.where(user: current_user)
   end
 
   def create
     @vehicule = Vehicule.new(vehicule_params)
     @vehicule.user = current_user
     if @vehicule.save
-      redirect_to vehicules_path(@vehicule)
+      # redirect_to vehicules_path(@vehicule)
+      redirect_to new_ride_path(@vehicule)
+
     else
       render :new, status: :unprocessable_entity
     end
