@@ -3,6 +3,7 @@ require 'json'
 class RidesController < ApplicationController
   before_action :set_ride, only: [:show]
 
+
   def index
     @rides = Ride.all
 
@@ -33,6 +34,17 @@ class RidesController < ApplicationController
   end
 
   def new
+    @VILLE_NAME = [ " Port-Louis	", "
+      Grand Baie	", "
+      Flic-en-Flac	", "
+      Le Morne Brabant	", "
+      Trou aux Biches	", "
+      Belle Mare	", "
+      Black River Gorges National Park	", "
+      Chamarel	", "
+      Tamarin	", "
+      Mahebourg	"
+    ]
     @ride = Ride.new
     @start_location = StartLocation.new
     @end_location = EndLocation.new
