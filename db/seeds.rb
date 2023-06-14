@@ -77,7 +77,7 @@ elodie = User.create(
   payment_details: Faker::Finance.credit_card,
   rating: rand(0..5)
 )
-file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709266/3a495b99baba5026fd41c9c1cd342a2e_gvznas.jpg")
+file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709267/97d60039fe121219664cd5d9139f40cd_dqnkhk.jpg")
 elodie.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
 elodie.save
 puts "created elodie photo"
