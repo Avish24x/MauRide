@@ -7,22 +7,41 @@
 </div>
 
 <div>
-  <% @bookings.each do |booking| %>
-    <div class="notification card-rides" >
-      <div class="notification-content">
-        <p><strong>Driver : </strong> <%= booking.user.first_name %> - <%= booking.user.last_name %></p>
-        <p><strong>Ride : </strong> from <%= booking.ride.start_location %> to <%= booking.ride.end_location %></p>
-        <p><strong>Seats : </strong> <%= booking.booked_seats %></p>
-        <p><strong>Start time : </strong> <%= booking.ride.start_time.strftime("%-d %b %Y, %H:%M") %></p>
-        <p><strong>Price : </strong> <%= booking.ride.price %> Rs</p>
-      </div>
 
-      <div class="notification-actions">
-        <%= link_to booking_path(booking),
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-          <i class="far fa-trash-alt"></i>
-        <% end %><hr>
+    <%# <div class="section-blanche" >
+      <h2>Rides to come</h2>
+    </div> %>
+
+    <% @bookings.each do |booking| %>
+      <div class="notification card-rides" >
+        <div class="notification-content">
+          <p><strong><%= booking.ride.start_time.strftime("%-d %b %Y, %H:%M") %></strong></p>
+          <p><strong> <%= booking.ride.start_location.address %> <i class="fa-solid fa-arrow-right"></i> <%= booking.ride.end_location.address %></strong></p><hr>
+
+          <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= booking.ride.price %></strong></p>
+          <p><%= booking.booked_seats %> seats</p>
+          <p>With <%= booking.ride.vehicule.user.first_name %> <%= booking.ride.vehicule.user.last_name %> <%= cl_image_tag booking.ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %></p>
+        </div>
+
+        <%# on affiche add review quand ride fini %>
+        <% if Time.now > booking.ride.end_time %>
+          <%= link_to ride_path(booking.ride),data: {turbo_method: :get} do %>
+          <p>Add a rating <i class="fa-solid fa-circle-plus fa-2xl" style="color: #670bff;"></i></p>
+          <% end %>
+        <%else %>
+          <div class="notification-actions">
+            <%= link_to booking_path(booking),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %><hr>
+          </div>
+        <% end %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+
+  <%# <div class="section-blanche" >
+    <h2>Previews rides</h2>
+  </div> %>
+
 </div>

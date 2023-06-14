@@ -16,7 +16,7 @@
         <div class="space_between">
           <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= ride.price %></strong></p>
           <p><%= link_to user_path(ride.vehicule.user),data: {turbo_method: :get} do %>
-            <%= cl_image_tag ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %>
+            <%= ride.vehicule.user.first_name %> <%= cl_image_tag ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %>
           <% end %></p>
         </div>
       </div>
