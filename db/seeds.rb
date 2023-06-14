@@ -105,7 +105,7 @@ end_location = EndLocation.create(
   longitude: ville_end[:longitude],
   address: ville_end[:name]
 )
-ride_elodie_seed = Ride.create(
+futur_ride_elodie_seed = Ride.create(
   start_location: start_location,
   end_location: end_location,
   ride_details: Faker::Lorem.sentence,
@@ -116,8 +116,38 @@ ride_elodie_seed = Ride.create(
   seats: rand(1..4),
   vehicule_id: vehicule_elodie_seed.id
 )
-puts "Created a ride with id: #{ride_elodie_seed.id}"
+puts "Created a ride with id: #{futur_ride_elodie_seed.id}"
 
+ville_start = VILLE.sample
+ville_end = VILLE.reject { |v| v[:name] == ville_start[:name] }.sample
+start_location = StartLocation.create(
+  latitude: ville_start[:latitude],
+  longitude: ville_start[:longitude],
+  address: ville_start[:name]
+)
+end_location = EndLocation.create(
+  latitude: ville_end[:latitude],
+  longitude: ville_end[:longitude],
+  address: ville_end[:name]
+)
+previews_ride_elodie_seed = Ride.create(
+  start_location: start_location,
+  end_location: end_location,
+  ride_details: Faker::Lorem.sentence,
+  distance: rand(1..50),
+  start_time: Date.today-3,
+  end_time: Date.today-2,
+  price: rand(10..100),
+  seats: rand(1..4),
+  vehicule_id: vehicule_elodie_seed.id
+)
+puts "Created a ride with id: #{previews_ride_elodie_seed.id}"
+
+puts "creation d'un booking pour preview ride d'elodie"
+  Booking.create(
+  ride_id: previews_ride_elodie_seed.id,
+  user_id: lea.id
+  )
 
 puts "crating 4 drivers"
 4.times do |index|
