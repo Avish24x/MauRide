@@ -39,8 +39,9 @@ images_passengers = [
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709266/3a495b99baba5026fd41c9c1cd342a2e_gvznas.jpg"
 ]
 puts "Deleting existing data..."
-Message.delete_all
+
 Participant.delete_all
+Message.delete_all
 Chatroom.delete_all
 Review.delete_all
 Booking.delete_all
@@ -68,6 +69,18 @@ lea.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
 lea.save
 puts "created lea photo"
 
+abhay = User.create(
+  email: 'abhay@gmail.com',
+  password: 'password',
+  first_name: "abhay",
+  last_name: "b",
+  age: 27,
+ )
+file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709268/c69866f67f2a18b4174c0234cea6091e_nxqis0.jpg")
+abhay.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
+abhay.save
+puts "created abhay photo"
+
 elodie = User.create(
   email: 'elodie@gmail.com',
   password: 'password',
@@ -78,7 +91,7 @@ elodie = User.create(
   phone_number: Faker::PhoneNumber.cell_phone_in_e164,
   payment_details: Faker::Finance.credit_card,
   rating: rand(0..5)
-)
+ )
 file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709267/97d60039fe121219664cd5d9139f40cd_dqnkhk.jpg")
 elodie.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
 elodie.save
