@@ -1,0 +1,59 @@
+.popup {
+  width: 300px;
+  background: linear-gradient(90deg, #7161ef 0%, #957fef 53%, #b79ced 100%);
+  border-radius: 15px;
+  position: absolute;
+  // so that it goes on top of the screen until we click on the button
+  top: 0;
+  left: 50%;
+  // add scale so that it decrease in size
+  transform: translate(-50%, -50px) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: #333;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.367);
+  // hide it until we click on button
+  visibility: hidden;
+  transition: transform 0.9s, top 0.9s;
+}
+
+.open-popup {
+  visibility: visible;
+  top: 70%;
+  transform: translate(-50%, -50px) scale(1);
+}
+
+.popup img {
+  width: 90px;
+  height: 90px;
+  margin-top: -30px;
+}
+
+.popup h2 {
+  color: black;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.popup p {
+  font-family: 'Poppins', sans-serif;
+}
+
+.popup button {
+  width: 40%;
+  margin-top: 30px;
+  padding: 8px 0;
+  background-color: white;
+  border: 0;
+  outline: none;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #575261;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  &:hover {
+    color: #261d36;
+  }
+}
