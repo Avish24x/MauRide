@@ -1,3 +1,5 @@
+require 'json'
+
 class RidesController < ApplicationController
   before_action :set_ride, only: [:show]
 
@@ -62,6 +64,28 @@ class RidesController < ApplicationController
     redirect_to rides_path, status: :see_other
   end
 
+  def nearby_rides
+    if params[:query]
+      @nearby_start_locations = StartLocation.near(params[:query], 7)
+    else
+      longitude = params[:longitude].to_f
+      latitude = params[:latitude].to_f
+      live_location = [longitude, latitude]
+      @nearby_start_locations = StartLocation.near(live_location, 7)
+    end
+
+    unless @nearby_start_locations.nil?
+      @markers = @nearby_start_locations.geocoded.map do |nearby_location|
+        {
+          lat: nearby_location.latitude,
+          lng: nearby_location.longitude,
+          info_window_html: render_to_string(partial: "info_window", locals: {ride: nearby_location.ride})
+        }
+      end
+    end
+
+    render json: @markers.to_json, status: :ok
+  end
   private
 
   def ride_params

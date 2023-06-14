@@ -91,6 +91,8 @@ elodie = User.create(
   phone_number: Faker::PhoneNumber.cell_phone_in_e164,
   payment_details: Faker::Finance.credit_card,
   rating: rand(0..5)
+
+
  )
 file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709267/97d60039fe121219664cd5d9139f40cd_dqnkhk.jpg")
 elodie.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
@@ -128,6 +130,7 @@ futur_ride_elodie_seed = Ride.create(
   price: rand(10..100),
   seats: rand(1..4),
   vehicule_id: vehicule_elodie_seed.id
+
 )
 puts "Created a ride with id: #{futur_ride_elodie_seed.id}"
 
