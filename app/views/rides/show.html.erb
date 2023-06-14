@@ -6,7 +6,7 @@
   <h2>Ride</h2>
 </div>
 
-<div class="notification">
+<div class="notification" >
   <div style="width: 100%; height: 400px;"
     data-controller="map"
     data-map-markers-value="<%= @markers.to_json %>"
@@ -20,13 +20,21 @@
     <p><strong>Start time : </strong><%= @ride.start_time.strftime("%-d %b %Y, %H:%M") %></p>
     <p><strong>End time : </strong><%= @ride.end_time.strftime("%-d %b %Y, %H:%M") %></p>
     <p><strong>Price : </strong>Rs <%= @ride.price %></p>
-    <p><strong>Details : </strong><%= @ride.ride_details %></p>
+    <p><strong>Details : </strong><%= @ride.ride_details %></p><hr>
 
-    <%# on affiche la photo du driver pour acceder à son profil %>
-    <p><%= link_to user_path(@ride.vehicule.user),
-      data: {turbo_method: :get} do %>
-      <%= cl_image_tag @ride.vehicule.user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
-    <% end %></p>
+
+    <div class="space_between">
+      <%= form_with url: chatrooms_path, data: { turbo_method: :post } do |f| %>
+        <%= f.hidden_field :user, as: :hidden, value: @ride.vehicule.user.id %>
+        <%= f.submit "Send a Message", class: "btn btn-flat" %>
+      <% end %>
+
+      <%# on affiche la photo du driver pour acceder à son profil %>
+      <p><%= link_to user_path(@ride.vehicule.user),
+        data: {turbo_method: :get} do %>
+        <%= cl_image_tag @ride.vehicule.user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
+      <% end %></p>
+    </div>
 
     <% if Time.now <= @ride.start_time %>
       <div class="popup-booking">
@@ -54,7 +62,6 @@
           }
       </script>
 
-
       <div class="notification-actions">
         <% if current_user == @ride.vehicule.user %>
           <%= link_to ride_path(@ride),
@@ -80,8 +87,3 @@
   </div>
 </div>
 
-
-<%= form_with url: chatrooms_path, data: { turbo_method: :post } do |f| %>
-  <%= f.hidden_field :user, value: @ride.vehicule.user.id %>
-  <%= f.submit "Send a Message" %>
-<% end %>

@@ -39,6 +39,7 @@ images_passengers = [
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709266/3a495b99baba5026fd41c9c1cd342a2e_gvznas.jpg"
 ]
 puts "Deleting existing data..."
+
 Participant.delete_all
 Message.delete_all
 Chatroom.delete_all
@@ -90,6 +91,8 @@ elodie = User.create(
   phone_number: Faker::PhoneNumber.cell_phone_in_e164,
   payment_details: Faker::Finance.credit_card,
   rating: rand(0..5)
+
+
  )
 file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709267/97d60039fe121219664cd5d9139f40cd_dqnkhk.jpg")
 elodie.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
@@ -99,7 +102,7 @@ puts "created elodie photo"
 puts "Creating a vehicle for elodie..."
 vehicule_elodie_seed = Vehicule.create(
   model: Faker::Vehicle.make_and_model,
-  registration_detail: Faker::Vehicle.standard_specs,
+  registration_detail: Faker::Vehicle.license_plate,
   user_id: elodie.id
 )
 puts "Created a vehicle for elodie."
@@ -117,7 +120,7 @@ end_location = EndLocation.create(
   longitude: ville_end[:longitude],
   address: ville_end[:name]
 )
-ride_elodie_seed = Ride.create(
+futur_ride_elodie_seed = Ride.create(
   start_location: start_location,
   end_location: end_location,
   ride_details: Faker::Lorem.sentence,
@@ -127,8 +130,40 @@ ride_elodie_seed = Ride.create(
   price: rand(10..100),
   seats: rand(1..4),
   vehicule_id: vehicule_elodie_seed.id
+
 )
-puts "Created a ride with id: #{ride_elodie_seed.id}"
+puts "Created a ride with id: #{futur_ride_elodie_seed.id}"
+
+ville_start = VILLE.sample
+ville_end = VILLE.reject { |v| v[:name] == ville_start[:name] }.sample
+start_location = StartLocation.create(
+  latitude: ville_start[:latitude],
+  longitude: ville_start[:longitude],
+  address: ville_start[:name]
+)
+end_location = EndLocation.create(
+  latitude: ville_end[:latitude],
+  longitude: ville_end[:longitude],
+  address: ville_end[:name]
+)
+previews_ride_elodie_seed = Ride.create(
+  start_location: start_location,
+  end_location: end_location,
+  ride_details: Faker::Lorem.sentence,
+  distance: rand(1..50),
+  start_time: Date.today-3,
+  end_time: Date.today-2,
+  price: rand(10..100),
+  seats: rand(1..4),
+  vehicule_id: vehicule_elodie_seed.id
+)
+puts "Created a ride with id: #{previews_ride_elodie_seed.id}"
+
+puts "creation d'un booking pour preview ride d'elodie"
+Booking.create(
+  ride_id: previews_ride_elodie_seed.id,
+  user_id: lea.id
+)
 
 puts "crating 4 drivers"
 4.times do |index|
@@ -154,7 +189,7 @@ puts "crating 4 drivers"
   puts "Creating a vehicle for the driver..."
   vehicule_seed = Vehicule.create(
     model: Faker::Vehicle.make_and_model,
-    registration_detail: Faker::Vehicle.standard_specs,
+    registration_detail: Faker::Vehicle.license_plate,
     user_id: driver_seed.id
   )
   puts "Created a vehicle for the driver."
@@ -197,7 +232,7 @@ puts "crating 4 drivers"
       phone_number: Faker::PhoneNumber.cell_phone_in_e164,
       payment_details: Faker::Finance.credit_card,
       rating: rand(0..5)
-      )
+    )
     file = URI.open(images_passengers[index])
     passenger_seed.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
     puts "created passenger_seed photo"
@@ -206,8 +241,8 @@ puts "crating 4 drivers"
     puts "creation d'un booking par ride"
     rand(0..2).times do
       Booking.create(
-      ride_id: ride_seed.id,
-      user_id: passenger_seed.id
+        ride_id: ride_seed.id,
+        user_id: passenger_seed.id
       )
     end
 
@@ -217,7 +252,7 @@ puts "crating 4 drivers"
         rating: rand(0..5),
         comment: Faker::Quote.matz,
         timestamp: Time.now,
-        user_id: passenger_seed.id, #le review appartient au passager
+        user_id: passenger_seed.id, # le review appartient au passager
         ride_id: ride_seed.id
       )
     end
