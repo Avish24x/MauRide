@@ -16,7 +16,7 @@
     <p><%= @user.age %> Years old</p>
   </div>
 
- <%# on affiche les butons edit et delete que si on est le user %>
+ <%# on affiche les boutons edit et delete que si on est le user %>
  <% if current_user == @user %>
     <div class="notification-actions">
       <%= link_to edit_user_registration_path, data: {turbo_method: :get} do %>
@@ -49,23 +49,28 @@
 
 <div>
 <%# on affiche les voitures de chaque driver %>
-  <% @user.vehicules.each do |vehicule| %>
-    <div class="notification user-card" >
-      <div class="notification-content">
-        <p>Model : <%= vehicule.model %></p>
-        <p>Registration details : <%= vehicule.registration_detail %></p>
-      </div>
-
-      <%# on affiche icone poubelle si c'est notre voiture %>
-      <% if current_user == vehicule.user %>
-        <div class="notification-actions">
-          <%= link_to user_path(current_user),
-          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-            <i class="far fa-trash-alt"></i>
-          <% end %><hr>
-        </div>
-      <% end %>
+  <% if @user.vehicules.nil? || @user.vehicules.empty? %>
+    <div class="notification user-card">
+    <p>No vehicules yet</p>
     </div>
+  <% else %>
+    <% @user.vehicules.each do |vehicule| %>
+      <div class="notification user-card" >
+        <div class="notification-content">
+          <p>Model : <%= vehicule.model %></p>
+          <p>Registration details : <%= vehicule.registration_detail %></p>
+        </div>
+
+        <%# on affiche icone poubelle si c'est notre voiture %>
+        <% if current_user == vehicule.user %>
+          <div class="notification-actions"><%= link_to user_path(current_user),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %><hr>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>
 

@@ -39,6 +39,9 @@ images_passengers = [
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709266/3a495b99baba5026fd41c9c1cd342a2e_gvznas.jpg"
 ]
 puts "Deleting existing data..."
+Message.delete_all
+Participant.delete_all
+Chatroom.delete_all
 Review.delete_all
 Booking.delete_all
 StartLocation.delete_all
@@ -65,7 +68,6 @@ lea.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
 lea.save
 puts "created lea photo"
 
-
 elodie = User.create(
   email: 'elodie@gmail.com',
   password: 'password',
@@ -85,7 +87,7 @@ puts "created elodie photo"
 puts "Creating a vehicle for elodie..."
 vehicule_elodie_seed = Vehicule.create(
   model: Faker::Vehicle.make_and_model,
-  registration_detail: Faker::Vehicle.standard_specs,
+  registration_detail: Faker::Vehicle.license_plate,
   user_id: elodie.id
 )
 puts "Created a vehicle for elodie."
@@ -141,7 +143,7 @@ puts "crating 4 drivers"
   puts "Creating a vehicle for the driver..."
   vehicule_seed = Vehicule.create(
     model: Faker::Vehicle.make_and_model,
-    registration_detail: Faker::Vehicle.standard_specs,
+    registration_detail: Faker::Vehicle.license_plate,
     user_id: driver_seed.id
   )
   puts "Created a vehicle for the driver."
