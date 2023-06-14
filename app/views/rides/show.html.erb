@@ -28,7 +28,7 @@
       <%= cl_image_tag @ride.vehicule.user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
     <% end %></p>
 
-    <% if Time.now <= @ride.end_time %>
+    <% if Time.now <= @ride.start_time %>
 
       <%= simple_form_for [@ride, @booking] do |form| %>
         <%= form.error_notification %>
@@ -46,20 +46,24 @@
       </div>
   </div>
 </div>
-<% else%>
-  <div class="notification user-edit-card">
-    <div class="notification-content">
-      <h2 class="review-ride-title"><strong>Add Review</strong></h2>
-      <%= simple_form_for [@ride, @review] do |f| %>
-        <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
-        <%= f.input :comment %>
-        <%= f.submit class: "btn btn-flat" %>
-      <% end %>
-    </div>
+    <% else%>
+      <div class="notification user-edit-card">
+        <div class="notification-content">
+          <h2 class="review-ride-title"><strong>Add Review</strong></h2>
+          <%= simple_form_for [@ride, @review] do |f| %>
+            <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
+            <%= f.input :comment %>
+            <%= f.submit class: "btn btn-flat" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
+
 
 <%= form_with url: chatrooms_path, data: { turbo_method: :post } do |f| %>
   <%= f.hidden_field :user, as: :hidden, value: @ride.vehicule.user.id %>
   <%= f.submit "Send a Message" %>
 <% end %>
+
