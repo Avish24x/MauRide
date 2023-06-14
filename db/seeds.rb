@@ -74,15 +74,61 @@ abhay = User.create(
   first_name: "abhay",
   last_name: "b",
   age: 27,
-  location: Faker::Address.full_address,
-  phone_number: Faker::PhoneNumber.cell_phone_in_e164,
-  payment_details: Faker::Finance.credit_card,
-  rating: rand(0..5)
-)
+ )
 file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709268/c69866f67f2a18b4174c0234cea6091e_nxqis0.jpg")
 abhay.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
 abhay.save
 puts "created abhay photo"
+
+elodie = User.create(
+  email: 'elodie@gmail.com',
+  password: 'password',
+  first_name: "Elodie",
+  last_name: "FAYA",
+  age: 19,
+  location: Faker::Address.full_address,
+  phone_number: Faker::PhoneNumber.cell_phone_in_e164,
+  payment_details: Faker::Finance.credit_card,
+  rating: rand(0..5)
+ )
+file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709267/97d60039fe121219664cd5d9139f40cd_dqnkhk.jpg")
+elodie.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
+elodie.save
+puts "created elodie photo"
+
+puts "Creating a vehicle for elodie..."
+vehicule_elodie_seed = Vehicule.create(
+  model: Faker::Vehicle.make_and_model,
+  registration_detail: Faker::Vehicle.standard_specs,
+  user_id: elodie.id
+)
+puts "Created a vehicle for elodie."
+
+puts "Creating 1 ride for elodie..."
+ville_start = VILLE.sample
+ville_end = VILLE.reject { |v| v[:name] == ville_start[:name] }.sample
+start_location = StartLocation.create(
+  latitude: ville_start[:latitude],
+  longitude: ville_start[:longitude],
+  address: ville_start[:name]
+)
+end_location = EndLocation.create(
+  latitude: ville_end[:latitude],
+  longitude: ville_end[:longitude],
+  address: ville_end[:name]
+)
+ride_elodie_seed = Ride.create(
+  start_location: start_location,
+  end_location: end_location,
+  ride_details: Faker::Lorem.sentence,
+  distance: rand(1..50),
+  start_time: Date.today+1,
+  end_time: Date.today+2,
+  price: rand(10..100),
+  seats: rand(1..4),
+  vehicule_id: vehicule_elodie_seed.id
+)
+puts "Created a ride with id: #{ride_elodie_seed.id}"
 
 puts "crating 4 drivers"
 4.times do |index|
