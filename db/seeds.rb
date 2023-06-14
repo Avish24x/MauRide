@@ -39,6 +39,9 @@ images_passengers = [
   "https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709266/3a495b99baba5026fd41c9c1cd342a2e_gvznas.jpg"
 ]
 puts "Deleting existing data..."
+Participant.delete_all
+Message.delete_all
+Chatroom.delete_all
 Review.delete_all
 Booking.delete_all
 StartLocation.delete_all
@@ -64,6 +67,22 @@ file = URI.open("https://avatars.githubusercontent.com/u/130605590?v=4")
 lea.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
 lea.save
 puts "created lea photo"
+
+abhay = User.create(
+  email: 'abhay@gmail.com',
+  password: 'password',
+  first_name: "abhay",
+  last_name: "b",
+  age: 27,
+  location: Faker::Address.full_address,
+  phone_number: Faker::PhoneNumber.cell_phone_in_e164,
+  payment_details: Faker::Finance.credit_card,
+  rating: rand(0..5)
+)
+file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709268/c69866f67f2a18b4174c0234cea6091e_nxqis0.jpg")
+abhay.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
+abhay.save
+puts "created abhay photo"
 
 puts "crating 4 drivers"
 4.times do |index|

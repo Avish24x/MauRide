@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :reviews, only: [:destroy]
   resources :bookings, only: %i[destroy index]
 
-  resources :chatrooms, only: %i[show create index] do
+  resources :chatrooms, only: %i[create show index destroy] do
     resources :messages, only: :create
   end
 end
