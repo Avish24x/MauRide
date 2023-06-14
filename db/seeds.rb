@@ -157,10 +157,10 @@ previews_ride_elodie_seed = Ride.create(
 puts "Created a ride with id: #{previews_ride_elodie_seed.id}"
 
 puts "creation d'un booking pour preview ride d'elodie"
-  Booking.create(
+Booking.create(
   ride_id: previews_ride_elodie_seed.id,
   user_id: lea.id
-  )
+)
 
 puts "crating 4 drivers"
 4.times do |index|
@@ -229,7 +229,7 @@ puts "crating 4 drivers"
       phone_number: Faker::PhoneNumber.cell_phone_in_e164,
       payment_details: Faker::Finance.credit_card,
       rating: rand(0..5)
-      )
+    )
     file = URI.open(images_passengers[index])
     passenger_seed.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
     puts "created passenger_seed photo"
@@ -238,8 +238,8 @@ puts "crating 4 drivers"
     puts "creation d'un booking par ride"
     rand(0..2).times do
       Booking.create(
-      ride_id: ride_seed.id,
-      user_id: passenger_seed.id
+        ride_id: ride_seed.id,
+        user_id: passenger_seed.id
       )
     end
 
@@ -249,7 +249,7 @@ puts "crating 4 drivers"
         rating: rand(0..5),
         comment: Faker::Quote.matz,
         timestamp: Time.now,
-        user_id: passenger_seed.id, #le review appartient au passager
+        user_id: passenger_seed.id, # le review appartient au passager
         ride_id: ride_seed.id
       )
     end
