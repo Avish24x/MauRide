@@ -28,7 +28,7 @@
       <%= cl_image_tag @ride.vehicule.user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
     <% end %></p>
 
-    <% if Time.now <= @ride.end_time %>
+    <% if Time.now <= @ride.start_time %>
 
       <%= simple_form_for [@ride, @booking] do |form| %>
         <%= form.error_notification %>
