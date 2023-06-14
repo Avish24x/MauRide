@@ -1,57 +1,72 @@
 <div class="tab-bar">
-   <%= link_to root_path do %>
-      <div class="link-to-pages">
+  <%= link_to root_path do %>
+    <div class="link-to-pages">
+      <span class="link-icon">
+        <!-- Home icon -->
+        <i class="fa-solid fa-house fa-xl" style="color: #670BFF;"></i>
+      </span>
+      <%# <span class="link-title">Home</span> %>
+    </div>
+  <% end %>
+
+
+  <%= link_to bookings_path do %>
+    <div class="link-to-pages">
         <span class="link-icon">
-          <!-- Home icon -->
-          <i class="fa-solid fa-house fa-xl" style="color: #670BFF;"></i>
-        </span>
-        <span class="link-title">Home</span>
-      </div>
-    <% end %>
-
-
-    <%= link_to bookings_path do %>
-      <div class="link-to-pages">
-          <span class="link-icon">
-            <!-- Booking icon -->
-            <i class="fa-solid fa-book-open fa-xl" style="color: #670BFF;"></i>
-            <!-- /icon -->
-          </span>
-          <span class="link-title">Booking</span>
-      </div>
-    <% end %>
-
-
-    <%= link_to new_ride_path do %>
-      <div class="link-to-pages">
-        <span class="link-icon">
-          <!-- Car icon -->
-          <i class="fa-solid fa-car fa-xl" style="color: #670BFF;"></i>
+          <!-- Booking icon -->
+          <i class="fa-solid fa-book-open fa-xl" style="color: #670BFF;"></i>
           <!-- /icon -->
         </span>
-        <span class="link-title">Add Ride</span>
-      </div>
-    <% end %>
+        <%# <span class="link-title">Booking</span> %>
+    </div>
+  <% end %>
 
-    <%= link_to root_path do %>
-      <div class="link-to-pages">
-        <span class="link-icon">
-          <!-- Message icon -->
-          <i class="fa-solid fa-message fa-xl" style="color: #670BFF;"></i>
-          <!-- /icon -->
-        </span>
-        <span class="link-title">Message</span>
-      </div>
-    <% end %>
 
-    <%= link_to edit_user_registration_path do %>
+  <%= link_to new_ride_path do %>
+    <div class="link-to-pages">
+      <span class="link-icon">
+        <!-- Car icon -->
+        <i class="fa-solid fa-car fa-xl" style="color: #670BFF;"></i>
+        <!-- /icon -->
+      </span>
+      <%# <span class="link-title">Add Ride</span> %>
+    </div>
+  <% end %>
+
+  <%= link_to chatrooms_path do %>
+    <div class="link-to-pages">
+      <span class="link-icon">
+        <!-- Message icon -->
+        <i class="fa-solid fa-message fa-xl" style="color: #670BFF;"></i>
+        <!-- /icon -->
+      </span>
+      <%# <span class="link-title">Message</span> %>
+    </div>
+  <% end %>
+
+  <%# si le visiteur est connecté en tant que user %>
+  <% if user_signed_in? %>
+    <%= link_to user_path(current_user) do %>
       <div class="link-to-pages">
         <span class="link-icon">
           <!-- Profile icon -->
           <i class="fa-solid fa-user fa-xl" style="color: #670BFF;"></i>
           <!-- /icon -->
         </span>
-        <span class="link-title">Profile</span>
+        <%# <span class="link-title">Profile</span> %>
       </div>
     <% end %>
+  <%# si le visiteur n'est pas connecté %>
+  <% else %>
+    <%= link_to new_user_registration_path do %>
+      <div class="link-to-pages">
+        <span class="link-icon">
+          <!-- Profile icon -->
+          <i class="fa-solid fa-user fa-xl" style="color: #670BFF;"></i>
+          <!-- /icon -->
+        </span>
+        <%# <span class="link-title">Profile</span> %>
+      </div>
+    <% end %>
+  <% end %>
 </div>

@@ -14,31 +14,36 @@
   </div>
 </div>
 
-<div>
-  <div class="notification">
-    <%# attention, si on rajoute une ligen ici, ca fait une colonne dans page  %>
-    <div class="notification-content">
-      <h2><strong><%= @ride.start_location.address%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= @ride.end_location.address%></strong></h2>
-      <p><strong>Start time : </strong><%= @ride.start_time.strftime("%-d %b %Y, %H:%M") %></p>
-      <p><strong>End time : </strong><%= @ride.end_time.strftime("%-d %b %Y, %H:%M") %></p>
-      <p><strong>Price : </strong><%= @ride.price %> Rs</p>
-      <p><strong>Details : </strong><%= @ride.ride_details %></p>
-      <%# seats available = rides.seats - booking.booked_seats %>
+<div class="notification user-edit-card">
+  <div class="notification-content-rides">
+    <h2><strong><%= @ride.start_location.address%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= @ride.end_location.address%></strong></h2>
+    <p><strong>Start time : </strong><%= @ride.start_time.strftime("%-d %b %Y, %H:%M") %></p>
+    <p><strong>End time : </strong><%= @ride.end_time.strftime("%-d %b %Y, %H:%M") %></p>
+    <p><strong>Price : </strong>Rs <%= @ride.price %></p>
+    <p><strong>Details : </strong><%= @ride.ride_details %></p><hr>
 
-      <%= simple_form_for [@ride, @booking] do |form| %>
-        <%= form.error_notification %>
 
-        <div class="form-inputs">
-          <%= form.input :booked_seats, collection: (1..@ride.seats) %>
-        </div>
-
-        <div class="form-actions">
-          <%= form.button :submit, "Book now", class: "btn btn-flat" %>
-        </div>
-
+    <div class="space_between">
+      <%= form_with url: chatrooms_path, data: { turbo_method: :post } do |f| %>
+        <%= f.hidden_field :user, as: :hidden, value: @ride.vehicule.user.id %>
+        <%= f.submit "Send a Message", class: "btn btn-flat" %>
       <% end %>
 
-      <%# on affiche icone poubelle  %>
+      <%# on affiche la photo du driver pour acceder à son profil %>
+      <p><%= link_to user_path(@ride.vehicule.user),
+        data: {turbo_method: :get} do %>
+        <%= cl_image_tag @ride.vehicule.user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
+      <% end %></p>
+    </div>
+
+    <% if Time.now <= @ride.start_time %>
+
+      <hr><%= simple_form_for [@ride, @booking] do |form| %>
+        <%= form.error_notification %>
+        <%= form.input :booked_seats, label: "How many seats ?", collection: (1..@ride.seats) %>
+        <%= form.button :submit, "Book now", class: "btn btn-flat" %>
+      <% end %>
+
       <div class="notification-actions">
         <% if current_user == @ride.vehicule.user %>
           <%= link_to ride_path(@ride),
@@ -47,44 +52,19 @@
           <% end %><hr>
         <% end %>
       </div>
-    </div>
   </div>
 </div>
-
-<div>
-  <h2>Reviews</h2>
-  <% @ride.reviews.each do |review| %>
-    <div class="notification">
-      <%# on affiche le createur de la review (image wagon pour l'instant) %>
-      <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
-      <div class="notification-content">
-        <p><small><%= time_ago_in_words(review.timestamp) %></small></p>
-        <p><strong>Rating:</strong> <%= review.rating %></p>
-        <p><strong>Comment:</strong> <%= review.comment %></p>
+    <% else%>
+      <div class="notification user-edit-card">
+        <div class="notification-content">
+          <h2 class="review-ride-title"><strong>Add Review</strong></h2>
+          <%= simple_form_for [@ride, @review] do |f| %>
+            <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
+            <%= f.input :comment %>
+            <%= f.submit class: "btn btn-flat" %>
+          <% end %>
+        </div>
       </div>
-
-      <%# on affiche icone poubelle  %>
-      <div class="notification-actions">
-        <% if current_user == review.user %>
-          <%= link_to ride_review_path(@ride, review),
-          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-            <i class="far fa-trash-alt"></i>
-          <% end %><hr>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-</div>
-
-<div>
-  <h2>Add Review</h2>
-  <div class="notification">
-    <div class="notification-content">
-      <%= simple_form_for [@ride, @review] do |f| %>
-        <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
-        <%= f.input :comment %>
-        <%= f.submit class: "btn btn-flat" %>
-      <% end %>
-    </div>
+    <% end %>
   </div>
 </div>

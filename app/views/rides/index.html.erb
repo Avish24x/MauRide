@@ -1,25 +1,25 @@
 <div class="section">
   <%= link_to root_path,
     data: {turbo_method: :get} do %>
-      <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
+      <i class="fa-solid fa-arrow-left fa-2xl" style="color: #000000;"></i>
   <% end %><hr>
   <h2>Rides</h2>
 </div>
 
 <div>
   <% @rides.each do |ride| %>
-
     <div class="notification card-rides" >
       <div class="notification-content">
         <p><strong><%= ride.start_time.strftime("%H:%M")%></strong> <%= link_to ride_path(ride) do %>
           <strong><%= ride.start_location.address%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= ride.end_location.address%></strong></p>
         <% end %><hr>
-        <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= ride.price %></strong></p>
+        <div class="space_between">
+          <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= ride.price %></strong></p>
+          <p><%= link_to user_path(ride.vehicule.user),data: {turbo_method: :get} do %>
+            <%= ride.vehicule.user.first_name %> <%= cl_image_tag ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %>
+          <% end %></p>
+        </div>
       </div>
     </div>
   <% end %>
 </div>
-
-<p><%= link_to "add a new ride", new_ride_path %></p>
-
-<%= link_to "vehicules", vehicules_path %>

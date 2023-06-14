@@ -11,6 +11,7 @@ class RidesController < ApplicationController
   def show
     @review = Review.new
     @booking = Booking.new
+    @chatroom = Chatroom.new
     @start_location = @ride.start_location
     @end_location = @ride.end_location
 

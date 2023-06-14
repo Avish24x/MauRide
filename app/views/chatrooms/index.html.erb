@@ -1,0 +1,9 @@
+ <% @chatrooms.each do |chatroom| %>
+    <h1><%= link_to chatroom.name, chatroom_path(chatroom) %></h1>
+
+    <%= link_to chatroom_path(chatroom),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+        <i class="far fa-trash-alt"></i>
+      <% end %><hr>
+
+ <% end %>
