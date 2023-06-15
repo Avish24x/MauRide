@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :users, only: :show
 
   get 'rides/nearby', to: 'rides#nearby_rides'
+  get '/search', to: 'rides#search', as: 'ride_search'
+
   resources :rides do
     resources :reviews
     resources :bookings, only: %i[create]

@@ -4,9 +4,14 @@ class RidesController < ApplicationController
   before_action :set_ride, only: [:show]
 
   def index
-    @rides = Ride.all
-
+    if params[:query].present?
+      query = params[:query]
+      @rides = Ride.joins(:start_location, :end_location).where("TO_CHAR(rides.start_time, 'HH:MI') ILIKE ? OR rides.ride_details ILIKE ? OR start_locations.address ILIKE ? OR end_locations.address ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+    else
+      @rides = Ride.all
+    end
   end
+
 
   def show
     @review = Review.new
@@ -14,6 +19,7 @@ class RidesController < ApplicationController
     @chatroom = Chatroom.new
     @start_location = @ride.start_location
     @end_location = @ride.end_location
+
 
     @markers =[
       {
@@ -37,6 +43,13 @@ class RidesController < ApplicationController
     @start_location = StartLocation.new
     @end_location = EndLocation.new
   end
+
+  def search
+    query = params[:query]
+    @rides = Ride.where("TO_CHAR(start_time, 'HH:MI') ILIKE ? OR ride_details ILIKE ? OR start_location ILIKE ? OR end_location ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+    redirect_to rides_path(query: query)
+  end
+
 
   def create
     @ride = Ride.new(ride_params)

@@ -13,7 +13,8 @@ export default class extends Controller {
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10",
       center: [57.5522, -20.3000],
-      zoom: 9.212
+      zoom: 9.212,
+      interactive: false
     });
 
     this.directions = new MapboxDirections({
@@ -35,7 +36,7 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      new mapboxgl.Marker()
+      new mapboxgl.Marker({interactive: false})
         .setLngLat([marker.lng, marker.lat])
         .addTo(this.map);
     });
@@ -54,7 +55,7 @@ export default class extends Controller {
           enableHighAccuracy: true
         },
         trackUserLocation: true,
-        showUserHeading: true
+        // showUserHeading: true,
       })
     );
   }
