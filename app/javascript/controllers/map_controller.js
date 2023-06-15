@@ -8,23 +8,24 @@ export default class extends Controller {
   }
 
   connect() {
+    // map for selected ride
     mapboxgl.accessToken = this.apiKeyValue;
     this.map = new mapboxgl.Map({
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10",
       center: [57.5522, -20.3000],
       zoom: 9.212,
-      interactive: false
+
     });
 
     this.directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken
     });
 
-    this.map.addControl(
-      this.directions,
-      'top-left'
-    );
+
+    this.map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-left');
+
+
 
     this.directions.setOrigin([this.markersValue[0].lng, this.markersValue[0].lat]);
     this.directions.setDestination([this.markersValue[1].lng, this.markersValue[1].lat]);
