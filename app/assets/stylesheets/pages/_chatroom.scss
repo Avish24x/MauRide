@@ -25,10 +25,15 @@
 }
 
 .time-message {
-  margin-left: 86px;
-  margin-right: 10px;
+  margin-left: 177px;
+  margin-right: 13px;
 }
 
 .combine-message {
   display: flex;
+  justify-content: space-between;
+}
+
+.combine-message .far {
+  margin-right: 19px;
 }
