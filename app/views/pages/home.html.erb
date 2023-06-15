@@ -1,7 +1,10 @@
 <div class="home-upperbody">
   <div class="home-header">
-    <h1>Mau<span>Ride</span></h1>
-    <h2>Get Started!</h2>
+    <%= image_tag "mauride_logo.png" %>
+    <div class="home-header-text">
+      <h1>Mau<span>Ride</span></h1>
+      <h2>Get Started!</h2>
+    </div>
   </div>
 
   <div class="container-home-location">
@@ -9,7 +12,7 @@
       <%= text_field_tag :query,
             params[:query],
             class: "form-control",
-            placeholder: "Type an address"
+            placeholder: "Type your destination"
         %>
       <%= submit_tag "Search", name: "", class: "btn btn-flat" %>
     <% end %>
