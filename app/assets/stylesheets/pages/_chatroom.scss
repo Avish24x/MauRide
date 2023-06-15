@@ -1,24 +1,34 @@
-.container.chatroom {
+.message-bubble {
+  background-color: #d0d1ff;
+  padding: 15px 10px;
+  margin-bottom: 13px;
+  border-radius: 20px;
+  width: 70%;
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
-.participants {
-  padding: 10px;
-  background-color: #f2f2f2;
+.name-chat {
+  font-family: 'Poppins', sans-serif;
 }
 
-.messages {
-  flex-grow: 1;
-  overflow-y: auto;
-  padding: 10px;
+.name-messages {
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  margin-top: 14px;
+  margin-left: 15px;
 }
 
-.message-form {
-  padding: 10px;
+.text-messages {
+  margin-left: 25px;
+  margin-bottom: 5px;
 }
 
-.message-input {
-  flex-grow: 1;
+.time-message {
+  margin-left: 86px;
+  margin-right: 10px;
+}
+
+.combine-message {
+  display: flex;
 }
