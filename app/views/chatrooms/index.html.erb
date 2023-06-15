@@ -1,5 +1,8 @@
  <% @chatrooms.each do |chatroom| %>
-    <h1><%= link_to chatroom.name, chatroom_path(chatroom) %></h1>
+
+    <h1><%= link_to chatroom.participants.first.user.first_name, chatroom_path(chatroom) %></h1>
+    <p><%= chatroom.messages.last.content %></p>
+    <p><%= time_ago_in_words(chatroom.messages.last.created_at) %></p>
 
     <%= link_to chatroom_path(chatroom),
       data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
