@@ -12,6 +12,9 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.user = current_user
     @booking.ride = @ride
+
+    @booking.total_price = @booking.ride.price * @booking.ride.seats
+
     @booking.save
     @ride.seats -= booking_params[:booked_seats].to_i
     @ride.save
