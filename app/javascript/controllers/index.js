@@ -16,8 +16,8 @@ application.register("hello", HelloController)
 import MapController from "./map_controller"
 application.register("map", MapController)
 
-import RidesMapController from "./rides_map_controller"
-application.register("rides-map", RidesMapController)
+import MaphomeController from "./maphome_controller"
+application.register("maphome", MaphomeController)
 
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)

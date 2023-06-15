@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :vehicules
   resources :users, only: :show
 
+  get 'rides/nearby', to: 'rides#nearby_rides'
   resources :rides do
     resources :reviews
     resources :bookings, only: %i[create]

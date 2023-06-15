@@ -34,8 +34,7 @@ User.create(
   location: Faker::Address.full_address,
   phone_number: Faker::PhoneNumber.cell_phone_in_e164,
   payment_details: Faker::Finance.credit_card,
-  rating: rand(0..5),
-  account_status: 'user'
+  rating: rand(0..5)
 )
 
 # Create a passenger user
@@ -48,8 +47,7 @@ passenger_seed = User.create(
   location: Faker::Address.full_address,
   phone_number: Faker::PhoneNumber.cell_phone_in_e164,
   payment_details: Faker::Finance.credit_card,
-  rating: rand(0..5),
-  account_status: 'user'
+  rating: rand(0..5)
 )
 puts "Created a passenger user."
 
@@ -64,8 +62,7 @@ puts "Created a passenger user."
     location: Faker::Address.full_address,
     phone_number: Faker::PhoneNumber.cell_phone_in_e164,
     payment_details: Faker::Finance.credit_card,
-    rating: rand(0..5),
-    account_status: 'driver'
+    rating: rand(0..5)
   )
   puts "Created a driver user."
 
