@@ -1,88 +1,90 @@
 <div class="section">
-  <%= link_to root_path,data: {turbo_method: :get} do %>
-      <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
-    <% end %><hr>
+  <%= link_to root_path, data: { turbo_method: :get } do %>
+    <i class="fa-solid fa-arrow-left fa-xl" style="color: #000000;"></i>
+  <% end %>
+  <hr>
   <h2>My bookings</h2>
 </div>
 
-  <%# on tri les bookings des rides pas encore passé avant, puis ceux finis %>
-  <% sorted_bookings = @bookings.to_a.sort_by {|booking| booking.ride.start_time }.reverse %>
-  <% previews_rides = [] %>
-  <% futurs_rides = [] %>
-
-  <% sorted_bookings.each do |booking| %>
-    <% if Time.now > booking.ride.start_time %>
-      <% previews_rides << booking %>
-    <% else %>
-      <% futurs_rides << booking %>
-    <% end %>
-  <% end %>
+<%# Sort the bookings into future and previous rides %>
+<% previews_rides = @bookings.select { |booking| Time.now > booking.ride.start_time } %>
+<% futurs_rides = @bookings - previews_rides %>
 
 <div>
-  <div class="section-blanche" >
+  <div class="section-blanche">
     <h2>Rides to come</h2>
   </div>
 
   <% futurs_rides.each do |booking| %>
-    <div class="notification card-rides" >
+    <div class="notification card-rides">
       <div class="notification-content">
         <p><strong><%= booking.ride.start_time.strftime("%-d %b %Y, %H:%M") %></strong></p>
-        <p><strong> <%= booking.ride.start_location.address %> <i class="fa-solid fa-arrow-right"></i> <%= booking.ride.end_location.address %></strong></p><hr>
+        <p><strong><%= booking.ride.start_location.address %> <i class="fa-solid fa-arrow-right"></i> <%= booking.ride.end_location.address %></strong></p>
+        <hr>
 
         <div class="space_between">
           <p><%= booking.booked_seats %> seats</p>
           <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= booking.total_price %></strong></p>
         </div>
 
-        <hr><div class="space_between">
+        <hr>
+        <div class="space_between">
           <p>With <%= booking.ride.vehicule.user.first_name %> <%= booking.ride.vehicule.user.last_name %> <%= cl_image_tag booking.ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %></p>
 
-          <%= link_to booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-          <p>Cancel booking <i class="far fa-trash-alt"></i></p>
-          <% end %><hr>
+          <%= link_to booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+            <p>Cancel booking <i class="far fa-trash-alt"></i></p>
+          <% end %>
+          <hr>
         </div>
       </div>
     </div>
   <% end %>
 
-  <div class="section-blanche" >
+  <div class="section-blanche">
     <h2>Previous rides</h2>
   </div>
 
- <% previews_rides.each do |booking| %>
-    <div class="notification card-rides" >
+  <% previews_rides.each do |booking| %>
+    <div class="notification card-rides">
       <div class="notification-content">
         <p><strong><%= booking.ride.start_time.strftime("%-d %b %Y, %H:%M") %></strong></p>
-        <p><strong> <%= booking.ride.start_location.address %> <i class="fa-solid fa-arrow-right"></i> <%= booking.ride.end_location.address %></strong></p><hr>
+        <p><strong><%= booking.ride.start_location.address %> <i class="fa-solid fa-arrow-right"></i> <%= booking.ride.end_location.address %></strong></p>
+        <hr>
 
         <div class="space_between">
           <p><%= booking.booked_seats %> seats</p>
           <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= booking.ride.price %></strong></p>
         </div>
 
-        <hr><div class="space_between">
+
+        <hr>
+        <div class="space_between">
           <div class="popup-review">
             <p>With <%= booking.ride.vehicule.user.first_name %> <%= booking.ride.vehicule.user.last_name %> <%= cl_image_tag booking.ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %></p>
-                  <%= link_to ride_path(booking.ride),data: {turbo_method: :get} do %>
-                  <p>Add a rating <i class="fa-solid fa-circle-plus fa-xl" style="color: #670bff;" onclick="openPopuptwo()"></i></p>
 
-            <% end %><hr>
+            <button class="confirm-button-review" onclick="openPopuptwo()">Add Rating</button>
 
             <div class="popuptwo" id="popuptwo">
-              <%= image_tag "tick.png" %>
+              <%= image_tag "mauride_logo.png" %>
               <h2>Add a Review</h2>
-              <p>Your payment has been confirmed succesfully</p>
+              <%= simple_form_for [booking.ride, Review.new] do |f| %>
+                <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: { data: { controller: "star-rating" } } %>
+                <%= f.input :comment %>
+                <%= f.submit class: "btn btn-flat" %>
+              <% end %>
               <button onclick="closePopuptwo()">Confirm</button>
-           </div>
+            </div>
 
             <script>
               let popuptwo = document.getElementById("popuptwo");
 
-              function openPopuptwo(params) {
-                popup.classList.add("open-popuptwo");
+              function openPopuptwo() {
+                popuptwo.classList.add("open-popuptwo");
               }
-              function closePopuptwo(params) {
-                popup.classList.remove("open-popuptwo");
+
+              function closePopuptwo() {
+                popuptwo.classList.remove("open-popuptwo");
+
               }
             </script>
           </div>

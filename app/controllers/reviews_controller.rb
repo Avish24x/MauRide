@@ -2,13 +2,14 @@ class ReviewsController < ApplicationController
   before_action :set_ride, only: [:create]
 
   def create
+    @user = User.find(params[:id])
     @review = Review.new(review_params)
     @review.ride = @ride
     @review.user = current_user
     @review.ride = @ride
     @review.timestamp = Time.now
     if @review.save
-      redirect_to ride_path(@ride)
+      redirect_to user_path(@user)
     else
       render "rides/show", status: :unprocessable_entity
     end

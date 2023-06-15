@@ -64,7 +64,7 @@
 
       <div class="notification-actions">
         <% if current_user == @ride.vehicule.user %>
-          <%= link_to ride_path(@ride),
+          <%= link_to user_path(@ride.vehicule.user),
           data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
             <i class="far fa-trash-alt"></i>
           <% end %><hr>
