@@ -1,12 +1,21 @@
+<div class="section">
+  <%= link_to root_path, data: { turbo_method: :get } do %>
+    <i class="fa-solid fa-arrow-left fa-2xl" style="color: #000000;"></i>
+  <% end %>
+  <hr>
+  <h2>Messages</h2>
+</div>
+
  <% @chatrooms.each do |chatroom| %>
 
-    <h1><%= link_to chatroom.participants.first.user.first_name, chatroom_path(chatroom) %></h1>
-    <p><%= chatroom.messages.last.content %></p>
-    <p><%= time_ago_in_words(chatroom.messages.last.created_at) %></p>
+    <h1 class="name-messages"><%= link_to chatroom.participants.first.user.first_name, chatroom_path(chatroom) %></h1>
+    <div class="combine-message">
+      <p class="text-messages"><%= chatroom.messages.last.content %></p>
+      <p class="text-messages time-message"><%= time_ago_in_words(chatroom.messages.last.created_at) %></p>
 
     <%= link_to chatroom_path(chatroom),
       data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
         <i class="far fa-trash-alt"></i>
-      <% end %><hr>
-
+      <% end %>
+    </div><hr>
  <% end %>

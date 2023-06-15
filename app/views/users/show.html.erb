@@ -34,8 +34,9 @@
 <%# private infos %>
 <% if current_user == @user %>
   <div class="notification user-card">
-    <p><i class="fa-solid fa-location-dot fa-l" style="color: #000000;"></i> <%= @user.location %></p>
+
     <div class="notification-content">
+      <p><i class="fa-solid fa-location-dot fa-l" style="color: #000000;"></i> <%= @user.location %></p>
       <p><i class="fa-solid fa-envelope fa-l" style="color: #000000;"></i> <%= @user.email %></p>
       <p><i class="fa-solid fa-mobile-screen-button fa-l" style="color: #000000;"></i> <%= @user.phone_number %></p>
     </div>

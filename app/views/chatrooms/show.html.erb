@@ -1,4 +1,12 @@
-<div class="container chatroom"
+<div class="section">
+  <%= link_to chatrooms_path, data: { turbo_method: :get } do %>
+    <i class="fa-solid fa-arrow-left fa-2xl" style="color: #000000;"></i>
+  <% end %>
+  <hr>
+  <h2>ChatRoom</h2>
+</div>
+
+<div class="container chatroom name-chat"
   data-controller="chatroom-subscription"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
 >
