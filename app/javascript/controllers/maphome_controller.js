@@ -17,13 +17,13 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/streets-v10",
       center: [57.5522, -20.3000],
       zoom: 9.212,
-      interactive: false
+      // interactive: false
     });
 
-    this.map.dragPan.disable();
-    this.map.scrollZoom.disable();
+    // this.map.dragPan.disable();
+    // this.map.scrollZoom.disable();
     this.map.doubleClickZoom.disable();
-    this.map.touchZoomRotate.disable();
+    // this.map.touchZoomRotate.disable();
 
     this.map.dragPan.disable();
     this.map.doubleClickZoom.disable();

@@ -7,7 +7,7 @@
 </div>
 
 <div class="section-blanche" >
-  <h2>Personnal information</h2>
+  <h2>Personal information</h2>
 </div>
 <div class="notification user-card">
   <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
@@ -34,8 +34,9 @@
 <%# private infos %>
 <% if current_user == @user %>
   <div class="notification user-card">
-    <p><i class="fa-solid fa-location-dot fa-l" style="color: #000000;"></i> <%= @user.location %></p>
+
     <div class="notification-content">
+      <p><i class="fa-solid fa-location-dot fa-l" style="color: #000000;"></i> <%= @user.location %></p>
       <p><i class="fa-solid fa-envelope fa-l" style="color: #000000;"></i> <%= @user.email %></p>
       <p><i class="fa-solid fa-mobile-screen-button fa-l" style="color: #000000;"></i> <%= @user.phone_number %></p>
     </div>

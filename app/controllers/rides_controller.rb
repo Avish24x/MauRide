@@ -58,9 +58,11 @@ class RidesController < ApplicationController
   end
 
   def search
-    query = params[:query]
-    @rides = Ride.where("TO_CHAR(start_time, 'HH:MI') ILIKE ? OR ride_details ILIKE ? OR start_location ILIKE ? OR end_location ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
-    redirect_to rides_path(query: query)
+    start_query = params[:start_location]
+    end_query = params[:end_location]
+    @rides = Ride.joins(:start_location, :end_location)
+                 .where("start_locations.address ILIKE ? AND end_locations.address ILIKE ?", "%#{start_query}%", "%#{end_query}%")
+    render :index
   end
 
 

@@ -44,7 +44,7 @@
           <%= form.button :submit, "Book now", class: "btn btn-flat", onclick: "openPopup()"%>
         <% end %>
         <div class="popup" id="popup">
-          <img src="https://o.remove.bg/downloads/bfd106cc-9134-45ce-8f0b-caefc02a77b8/Golden-check-mark-inside-golden-circle-on-transparent-background-PNG-removebg-preview.png" alt="tick">
+          <%= image_tag "tick.png" %>
           <h2>Thank You!</h2>
           <p>Your payment has been confirmed succesfully</p>
           <button onclick="closePopup()">OK</button>
@@ -86,4 +86,3 @@
     <% end %>
   </div>
 </div>
-
