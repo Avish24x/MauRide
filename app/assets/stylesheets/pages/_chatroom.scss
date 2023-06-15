@@ -1,0 +1,24 @@
+.container.chatroom {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.participants {
+  padding: 10px;
+  background-color: #f2f2f2;
+}
+
+.messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.message-form {
+  padding: 10px;
+}
+
+.message-input {
+  flex-grow: 1;
+}
