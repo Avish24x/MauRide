@@ -61,12 +61,34 @@
         </div>
 
         <hr><div class="space_between">
-          <p>With <%= booking.ride.vehicule.user.first_name %> <%= booking.ride.vehicule.user.last_name %> <%= cl_image_tag booking.ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %></p>
+          <div class="popup-review">
+            <p>With <%= booking.ride.vehicule.user.first_name %> <%= booking.ride.vehicule.user.last_name %> <%= cl_image_tag booking.ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %></p>
+                  <%= link_to ride_path(booking.ride),data: {turbo_method: :get} do %>
+                  <p>Add a rating <i class="fa-solid fa-circle-plus fa-xl" style="color: #670bff;" onclick="openPopuptwo()"></i></p>
 
-          <%= link_to ride_path(booking.ride),data: {turbo_method: :get} do %>
-          <p>Add a rating <i class="fa-solid fa-circle-plus fa-xl" style="color: #670bff;"></i></p>
-          <% end %><hr>
+            <% end %><hr>
+
+            <div class="popuptwo" id="popuptwo">
+              <%= image_tag "tick.png" %>
+              <h2>Add a Review</h2>
+              <p>Your payment has been confirmed succesfully</p>
+              <button onclick="closePopuptwo()">Confirm</button>
+           </div>
+
+            <script>
+              let popuptwo = document.getElementById("popuptwo");
+
+              function openPopuptwo(params) {
+                popup.classList.add("open-popuptwo");
+              }
+              function closePopuptwo(params) {
+                popup.classList.remove("open-popuptwo");
+              }
+            </script>
+          </div>
         </div>
+
+      </div>
       </div>
     </div>
   <% end %>
