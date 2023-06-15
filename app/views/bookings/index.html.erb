@@ -24,7 +24,7 @@
 
         <div class="space_between">
           <p><%= booking.booked_seats %> seats</p>
-          <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= booking.ride.price %></strong></p>
+          <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= booking.total_price %></strong></p>
         </div>
 
         <hr>
@@ -56,6 +56,7 @@
           <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= booking.ride.price %></strong></p>
         </div>
 
+
         <hr>
         <div class="space_between">
           <div class="popup-review">
@@ -83,10 +84,13 @@
 
               function closePopuptwo() {
                 popuptwo.classList.remove("open-popuptwo");
+
               }
             </script>
           </div>
         </div>
+
+      </div>
       </div>
     </div>
   <% end %>
