@@ -1,34 +1,44 @@
 <div class="section">
-  <%= link_to root_path,
-    data: {turbo_method: :get} do %>
-      <i class="fa-solid fa-arrow-left fa-2xl" style="color: #000000;"></i>
-  <% end %><hr>
+  <%= link_to root_path, data: { turbo_method: :get } do %>
+    <i class="fa-solid fa-arrow-left fa-2xl" style="color: #000000;"></i>
+  <% end %>
+  <hr>
   <h2>Rides</h2>
 </div>
 
-<div class="notification" >
-  <div style="width: 100%; height: 300px;"
-    data-controller="maphome"
-    data-maphome-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div>
+<div style="width: 100%; height: 550px;"
+  data-controller="maphome"
+  data-maphome-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
 
-
 <div>
-  <% @rides.each do |ride| %>
-    <div class="notification card-rides" >
-      <div class="notification-content">
-        <p><strong><%= ride.start_time.strftime("%-d %b %Y, %H:%M")%></strong></p>
-         <%= link_to ride_path(ride) do %>
-          <strong><%= ride.start_location.address%></strong> <i class="fa-solid fa-arrow-right"></i> <strong><%= ride.end_location.address%></strong></p>
-        <% end %><hr>
-        <div class="space_between">
-          <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= ride.price %></strong></p>
-          <p><%= link_to user_path(ride.vehicule.user),data: {turbo_method: :get} do %>
-            <%= ride.vehicule.user.first_name %> <%= cl_image_tag ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %>
-          <% end %></p>
+  <% if @rides.present? %>
+    <% @rides.each do |ride| %>
+      <div class="notification card-rides">
+        <div class="notification-content">
+          <p>
+            <p><strong><%= ride.start_time.strftime("%-d %b %Y, %H:%M")%></strong></p>
+            <%= link_to ride_path(ride) do %>
+              <strong><%= ride.start_location.address %></strong>
+              <i class="fa-solid fa-arrow-right"></i>
+              <strong><%= ride.end_location.address %></strong>
+            <% end %>
+          </p>
+          <hr>
+          <div class="space_between">
+            <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= ride.price %></strong></p>
+            <p>
+              <%= link_to user_path(ride.vehicule.user), data: { turbo_method: :get } do %>
+                <%= ride.vehicule.user.first_name %>
+                <%= cl_image_tag ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %>
+              <% end %>
+            </p>
+          </div>
+
         </div>
       </div>
-    </div>
+    <% end %>
+  <% else %>
+    <p>No rides found.</p>
   <% end %>
 </div>
