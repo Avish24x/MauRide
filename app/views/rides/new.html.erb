@@ -1,3 +1,4 @@
+
 <div class="section">
   <%= link_to root_path,
     data: {turbo_method: :get} do %>
@@ -22,17 +23,17 @@
 <div class="notification add-rides" >
   <div class="notification-content">
       <%= simple_fields_for :start_location do |p| %>
-        <%= p.input :address, label: "Start location" %>
+        <%= p.input :address, label: "Start location", collection: @VILLE_NAME %>
       <% end %>
       <%= simple_fields_for :end_location do |t| %>
-        <%= t.input :address, label: "End location"  %>
+        <%= t.input :address, label: "End location" , collection: @VILLE_NAME %>
       <% end %>
 
       <%= f.input :ride_details %>
       <%= f.input :start_time, as: :string, input_html: { data: { controller: "flatpickr" } } %>
       <%= f.input :end_time, as: :string, input_html: { data: { controller: "flatpickr" } } %>
       <%= f.input :price %>
-      <%= f.input :seats %>
+      <%= f.input :seats, collection: (1..4) %>
       <%= f.submit class: "btn btn-flat" %>
     <% end %>
   </div>

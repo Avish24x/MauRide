@@ -4,7 +4,6 @@ class PagesController < ApplicationController
   def home
     if params[:query]
       @rides = StartLocation.near(params[:query], 5000).map(&:ride)
-
     else
       @rides = nil
     end

@@ -32,7 +32,7 @@ class ChatroomsController < ApplicationController
 
   def get_name(user1, user2)
     users = [user1, user2].sort
-    "private_#{users[0].id}_#{users[1].id}"
+    "Message #{users[0].id}_#{users[1].id}"
   end
 
   def params_chatroom_user

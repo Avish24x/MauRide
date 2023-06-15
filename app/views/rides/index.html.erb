@@ -17,7 +17,7 @@
       <div class="notification card-rides">
         <div class="notification-content">
           <p>
-            <strong><%= ride.start_time.strftime("%H:%M") %></strong>
+            <p><strong><%= ride.start_time.strftime("%-d %b %Y, %H:%M")%></strong></p>
             <%= link_to ride_path(ride) do %>
               <strong><%= ride.start_location.address %></strong>
               <i class="fa-solid fa-arrow-right"></i>
@@ -34,6 +34,7 @@
               <% end %>
             </p>
           </div>
+
         </div>
       </div>
     <% end %>

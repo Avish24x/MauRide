@@ -3,7 +3,9 @@ require 'json'
 class RidesController < ApplicationController
   before_action :set_ride, only: [:show]
 
+
   def index
+
     if params[:query].present?
       query = params[:query]
       @rides = Ride.joins(:start_location, :end_location).where("TO_CHAR(rides.start_time, 'HH:MI') ILIKE ? OR rides.ride_details ILIKE ? OR start_locations.address ILIKE ? OR end_locations.address ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
@@ -39,6 +41,17 @@ class RidesController < ApplicationController
   end
 
   def new
+    @VILLE_NAME = [ " Port-Louis	", "
+      Grand Baie	", "
+      Flic-en-Flac	", "
+      Le Morne Brabant	", "
+      Trou aux Biches	", "
+      Belle Mare	", "
+      Black River Gorges National Park	", "
+      Chamarel	", "
+      Tamarin	", "
+      Mahebourg	"
+    ]
     @ride = Ride.new
     @start_location = StartLocation.new
     @end_location = EndLocation.new
