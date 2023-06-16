@@ -241,7 +241,6 @@ Booking.create(
   ride_id: previews_ride_abhay_seed.id,
   user_id: milou.id
 )
-
 puts "creation 1 review pour abhay"
 Review.create(
   rating: 4,

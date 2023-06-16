@@ -8,18 +8,24 @@
   </div>
 
   <div class="container-home-location">
-    <%= form_with url: ride_search_path, method: :get, class: "d-flex" do |f| %>
-      <%= f.text_field :start_location,
-            value: params[:start_location],
-            class: "form-control",
-            placeholder: "Your start Location"
-        %>
-      <%= f.text_field :end_location,
-            value: params[:end_location],
-            class: "form-control",
-            placeholder: "Search by End Location"
-        %>
-      <%= f.submit "Search", class: "btn btn-flat" %>
+    <%= form_with url: ride_search_path, method: :get do |f| %>
+
+    <div class="notification-content">
+      <p><%= f.text_field :start_location,
+        value: params[:start_location],
+        class: "form-control",
+        placeholder: "Your Start Location"
+        %></p>
+      <p><%= f.text_field :end_location,
+        value: params[:end_location],
+        class: "form-control",
+        placeholder: "Your End Location"
+      %></p>
+    </div>
+
+      <div class="form-actions button-update">
+        <%= f.submit "Search", class: "btn btn-flat" %>
+      </div>
     <% end %>
   </div>
 </div>
