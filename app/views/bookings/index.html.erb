@@ -62,7 +62,7 @@
           <div class="popup-review">
             <p>With <%= booking.ride.vehicule.user.first_name %> <%= booking.ride.vehicule.user.last_name %> <%= cl_image_tag booking.ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %></p>
 
-            <button class="confirm-button-review" onclick="openPopuptwo()">Add Rating</button>
+            <button class="btn btn-flat" onclick="openPopuptwo()">Add Rating</button>
 
             <div class="popuptwo" id="popuptwo">
               <%= image_tag "mauride_logo.png" %>
