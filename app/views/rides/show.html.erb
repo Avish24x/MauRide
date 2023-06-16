@@ -22,7 +22,6 @@
     <p><strong>Price : </strong>Rs <%= @ride.price %></p>
     <p><strong>Details : </strong><%= @ride.ride_details %></p><hr>
 
-
     <div class="space_between">
       <%= form_with url: chatrooms_path, data: { turbo_method: :post } do |f| %>
         <%= f.hidden_field :user, as: :hidden, value: @ride.vehicule.user.id %>
@@ -38,7 +37,6 @@
       </p>
     </div>
 
-    <% if Time.now <= @ride.start_time %>
       <div class="popup-booking">
         <%= simple_form_for [@ride, @booking] do |form| %>
           <%= form.error_notification %>

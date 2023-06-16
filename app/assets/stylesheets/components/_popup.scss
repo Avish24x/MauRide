@@ -1,4 +1,4 @@
-.popuptwo {
+.popup {
   width: 300px;
   background: linear-gradient(90deg, #7161ef 0%, #957fef 53%, #b79ced 100%);
   border-radius: 15px;
@@ -17,30 +17,30 @@
   transition: transform 0.3s, top 0.3s;
 }
 
-.open-popuptwo {
+.open-popup {
   visibility: visible;
   top: 50%;
   transform: translate(-50%, -50px) scale(1);
 }
 
-.popuptwo img {
+.popup img {
   width: 180px;
   height: 90px;
   margin-top: -20px;
 }
 
-.popuptwo h2 {
+.popup h2 {
   color: black;
   font-family: 'Poppins', sans-serif;
   font-weight: bold;
   font-size: 28px;
 }
 
-.popuptwo p {
+.popup p {
   font-family: 'Poppins', sans-serif;
 }
 
-.popuptwo button {
+.popup button {
   width: 40%;
   margin-top: 30px;
   padding: 8px 0;
@@ -58,7 +58,6 @@
   }
 }
 
-
 .popuptwo {
   width: 300px;
   background: linear-gradient(90deg, #7161ef 0%, #957fef 53%, #b79ced 100%);
@@ -80,12 +79,12 @@
 
 .open-popuptwo {
   visibility: visible;
-  top: 70%;
+  top: 20vh;
   transform: translate(-50%, -50px) scale(1);
 }
 
 .popuptwo img {
-  width: 90px;
+  width: 250px;
   height: 90px;
   margin-top: -30px;
 }

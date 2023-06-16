@@ -29,7 +29,10 @@
 
         <hr>
         <div class="space_between">
-          <p>With <%= booking.ride.vehicule.user.first_name %> <%= booking.ride.vehicule.user.last_name %> <%= cl_image_tag booking.ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %></p>
+          <p><%= link_to user_path(booking.ride.vehicule.user), data: { turbo_method: :get } do %>
+              <%= booking.ride.vehicule.user.first_name %> <%= booking.ride.vehicule.user.last_name %>
+              <%= cl_image_tag booking.ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %>
+            <% end %></p>
 
           <%= link_to booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
             <p>Cancel booking <i class="far fa-trash-alt"></i></p>
@@ -55,12 +58,14 @@
           <p><%= booking.booked_seats %> seats</p>
           <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= booking.ride.price %></strong></p>
         </div>
-
-
         <hr>
+
         <div class="space_between">
-          <div class="popup-review">
-            <p>With <%= booking.ride.vehicule.user.first_name %> <%= booking.ride.vehicule.user.last_name %> <%= cl_image_tag booking.ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %></p>
+          <div class="popup-review button-update">
+            <p><%= link_to user_path(booking.ride.vehicule.user), data: { turbo_method: :get } do %>
+                <%= booking.ride.vehicule.user.first_name %> <%= booking.ride.vehicule.user.last_name %>
+                <%= cl_image_tag booking.ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %>
+              <% end %></p>
 
             <button class="btn btn-flat" onclick="openPopuptwo()">Add Rating</button>
 
@@ -72,7 +77,6 @@
                 <%= f.input :comment %>
                 <%= f.submit class: "btn btn-flat" %>
               <% end %>
-              <button onclick="closePopuptwo()">Confirm</button>
             </div>
 
             <script>
@@ -84,13 +88,10 @@
 
               function closePopuptwo() {
                 popuptwo.classList.remove("open-popuptwo");
-
               }
             </script>
           </div>
         </div>
-
-      </div>
       </div>
     </div>
   <% end %>
