@@ -55,14 +55,13 @@
           <p><%= booking.booked_seats %> seats</p>
           <p><i class="fa-solid fa-rupee-sign"></i> <strong><%= booking.ride.price %></strong></p>
         </div>
-
-
         <hr>
+
         <div class="space_between">
           <div class="popup-review">
             <p>With <%= booking.ride.vehicule.user.first_name %> <%= booking.ride.vehicule.user.last_name %> <%= cl_image_tag booking.ride.vehicule.user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, radius: :max %></p>
 
-            <button class="confirm-button-review" onclick="openPopuptwo()">Add Rating</button>
+            <button class="btn btn-flat" onclick="openPopuptwo()">Add Rating</button>
 
             <div class="popuptwo" id="popuptwo">
               <%= image_tag "mauride_logo.png" %>
@@ -72,7 +71,6 @@
                 <%= f.input :comment %>
                 <%= f.submit class: "btn btn-flat" %>
               <% end %>
-              <button onclick="closePopuptwo()">Confirm</button>
             </div>
 
             <script>
@@ -84,13 +82,10 @@
 
               function closePopuptwo() {
                 popuptwo.classList.remove("open-popuptwo");
-
               }
             </script>
           </div>
         </div>
-
-      </div>
       </div>
     </div>
   <% end %>
