@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-   before_action :set_user, only: %i[show, index]
+   before_action :set_user, only: %i[show]
 
   def show
     @review = Review.new
@@ -11,5 +11,6 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+
   end
 end

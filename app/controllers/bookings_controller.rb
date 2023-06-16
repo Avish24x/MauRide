@@ -1,6 +1,8 @@
 class BookingsController < ApplicationController
   def index
     @bookings = Booking.where(user: current_user)
+    @ride = Ride.find_by_id(params[:ride_id])
+    @review = Review.new
   end
 
   def new
