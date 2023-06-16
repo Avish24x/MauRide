@@ -6,10 +6,10 @@ class UsersController < ApplicationController
 
   def show
     @review = Review.new
-    @reviews = @user&.vehicules&.map(&:rides)&.first&.map(&:reviews)&.first unless @user&.vehicules&.empty?
+    @reviews = @user&.vehicules&.map(&:rides)&.first&.map(&:bookings)&.first&.map(&:reviews)&.pop unless @user&.vehicules&.empty?
     @vehicules = Vehicule.all
   end
-  
+
   private
 
   def set_user
