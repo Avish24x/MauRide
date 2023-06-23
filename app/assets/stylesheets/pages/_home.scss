@@ -54,6 +54,9 @@ body {
   margin: auto;
   display: block;
 }
+.directions-control-directions{
+  display: none;
+}
 
 .container-home-location {
   // background: linear-gradient(90deg, #7161ef 0%, #957fef 53%, #b79ced 100%);
@@ -66,7 +69,8 @@ body {
   padding-top: 3rem;
   padding-bottom: 3rem;
   position: absolute;
-  top: 46%;
+  top: 43%;
+  padding: 10px;
 }
 
 .container-home-location h3 {

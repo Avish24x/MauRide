@@ -1,7 +1,6 @@
 require 'faker'
 require 'open-uri'
 VILLE = [
-  { name: 'Phoenix' , latitude:	-20.2867	,longitude:	57.5022	},
   { name: 'Port-Louis', latitude: -20.1606, longitude: 57.4989 },
   { name: 'Grand Baie', latitude: -20.0063, longitude: 57.5816 },
   { name: 'Flic-en-Flac', latitude: -20.2807, longitude: 57.3605 },
@@ -118,7 +117,7 @@ vehicule_elodie_seed = Vehicule.create(
 puts "Created a vehicle for elodie."
 
 puts "Creating 1 ride for elodie..."
-ville_start = { name: 'Phoenix', latitude:	-20.2867, longitude:	57.5022	}
+ville_start = { name: 'Trou aux Biches', latitude: -20.0378, longitude: 57.5477 }
 ville_end = { name: 'Chamarel', latitude: -20.4281, longitude: 57.3742 }
 start_location = StartLocation.create(
   latitude: ville_start[:latitude],
@@ -136,21 +135,26 @@ futur_ride_elodie_seed = Ride.create(
   end_location: end_location,
   ride_details: "Non smoking ride, pet accepted",
   distance: 32,
-  start_time: "June 17, 2023 8:30 AM",
-  end_time: "June 17, 2023 9:30 AM",
+  start_time: "June 24, 2023 8:30 AM",
+  end_time: "June 24, 2023 10:00 AM",
   price: 150,
   seats: 4,
   vehicule_id: vehicule_elodie_seed.id
 )
 puts "Created a ride with id: #{futur_ride_elodie_seed.id}"
 
+puts "creation d'un booking pour preview ride d'abhay"
+booking_elodie = Booking.create(
+  ride_id: futur_ride_elodie_seed.id,
+  user_id: george.id
+)
 puts "creation 1 review pour elodie"
 Review.create(
   rating: 5,
   comment: "Super ride in good company",
   timestamp: Time.now,
   user_id: george.id,
-  ride_id: futur_ride_elodie_seed.id
+  booking_id: booking_elodie.id
 )
 
 #----------------------------#
@@ -178,7 +182,7 @@ vehicule_abhay_seed = Vehicule.create(
   user_id: abhay.id
 )
 puts "Creating 2 ride for abhay..."
-ville_start = { name: 'Phoenix', latitude:	-20.2867, longitude:	57.5022	}
+ville_start = { name: 'Trou aux Biches', latitude: -20.0378, longitude: 57.5477 }
 ville_end = { name: 'Chamarel', latitude: -20.4281, longitude: 57.3742 }
 start_location = StartLocation.create(
   latitude: ville_start[:latitude],
@@ -196,8 +200,8 @@ futur_ride_abhay_seed = Ride.create(
   end_location: end_location,
   ride_details: "Non smoking ride, pet accepted",
   distance: 32,
-  start_time: "June 17, 2023 13:00 PM",
-  end_time: "June 17, 2023 14:00 PM",
+  start_time: "June 24, 2023 13:00 PM",
+  end_time: "June 24, 2023 14:30 PM",
   price: 150,
   seats: 4,
   vehicule_id: vehicule_abhay_seed.id
@@ -237,7 +241,7 @@ previews_ride_abhay_seed = Ride.create(
 puts "Created a ride with id: #{previews_ride_abhay_seed.id}"
 
 puts "creation d'un booking pour preview ride d'abhay"
-Booking.create(
+booking_abhay = Booking.create(
   ride_id: previews_ride_abhay_seed.id,
   user_id: milou.id
 )
@@ -246,8 +250,8 @@ Review.create(
   rating: 4,
   comment: "Nice driver",
   timestamp: Time.now,
-  user_id: juanita.id,
-  ride_id: previews_ride_abhay_seed.id
+  user_id: milou.id,
+  booking_id: booking_abhay.id
 )
 
 puts "Seeding completed successfully!"

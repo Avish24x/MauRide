@@ -1,7 +1,6 @@
 class Ride < ApplicationRecord
   belongs_to :vehicule
-  has_many :bookings
-  has_many :reviews, dependent: :destroy
+  has_many :bookings, dependent: :destroy
   has_one :start_location, dependent: :destroy
   has_one :end_location, dependent: :destroy
   # geocoded_by :address
