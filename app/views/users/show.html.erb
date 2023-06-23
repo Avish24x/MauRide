@@ -6,35 +6,37 @@
   <h2>Profile</h2>
 </div>
 
-<div class="section-blanche" >
+<div class="section-blanche">
   <h2>Personal information</h2>
 </div>
-<div class="notification user-card">
-  <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
-  <div class="notification-content">
-    <p><strong><%= @user.first_name %> <%= @user.last_name %></strong></p>
-    <p><%= @user.age %> Years old</p>
-  </div>
-
- <%# on affiche les boutons edit et delete que si on est le user %>
- <% if current_user == @user %>
-    <div class="notification-actions">
-      <%= link_to edit_user_registration_path, data: {turbo_method: :get} do %>
-        <p>Edit <i class="fas fa-pencil-alt"></i></p>
-      <% end %>
-
-      <%= link_to root_path,
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-        <p><i class="far fa-trash-alt"></i></a></p>
-      <% end %>
-    </div>
-  <% end %>
-</div>
-
-<%# private infos %>
 <% if current_user == @user %>
   <div class="notification user-card">
-
+    <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
+    <div class="notification-content">
+      <p><strong><%= @user.first_name %> <%= @user.last_name %></strong></p>
+      <p><%= @user.age %> Years old</p>
+      <div class="notification-actions">
+        <%= link_to edit_user_registration_path, data: {turbo_method: :get} do %>
+          <p>Edit <i class="fas fa-pencil-alt"></i></p>
+        <% end %>
+        <%= link_to root_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+          <p><i class="far fa-trash-alt"></i></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="notification-content">
+      <p><i class="fa-solid fa-location-dot fa-l" style="color: #000000;"></i> <%= @user.location %></p>
+      <p><i class="fa-solid fa-envelope fa-l" style="color: #000000;"></i> <%= @user.email %></p>
+      <p><i class="fa-solid fa-mobile-screen-button fa-l" style="color: #000000;"></i> <%= @user.phone_number %></p>
+    </div>
+  </div>
+<% else %>
+  <div class="notification user-card">
+    <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
+    <div class="notification-content">
+      <p><strong><%= @user.first_name %> <%= @user.last_name %></strong></p>
+      <p><%= @user.age %> Years old</p>
+    </div>
     <div class="notification-content">
       <p><i class="fa-solid fa-location-dot fa-l" style="color: #000000;"></i> <%= @user.location %></p>
       <p><i class="fa-solid fa-envelope fa-l" style="color: #000000;"></i> <%= @user.email %></p>
@@ -43,31 +45,28 @@
   </div>
 <% end %>
 
-
 <div class="section-blanche">
   <h2>Vehicles</h2>
 </div>
 
 <div>
-<%# on affiche les voitures de chaque driver %>
   <% if @user.vehicules.nil? || @user.vehicules.empty? %>
     <div class="notification user-card">
-    <p>No vehicules yet</p>
+      <p>No vehicles yet</p>
     </div>
   <% else %>
     <% @user.vehicules.each do |vehicule| %>
-      <div class="notification user-card" >
+      <div class="notification user-card">
         <div class="notification-content">
-          <p>Model : <%= vehicule.model %></p>
-          <p>Registration details : <%= vehicule.registration_detail %></p>
+          <p>Model: <%= vehicule.model %></p>
+          <p>Registration details: <%= vehicule.registration_detail %></p>
         </div>
-
-        <%# on affiche icone poubelle si c'est notre voiture %>
         <% if current_user == vehicule.user %>
-          <div class="notification-actions"><%= link_to user_path(current_user),
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-              <i class="far fa-trash-alt"></i>
-            <% end %><hr>
+          <div class="notification-actions">
+            <%= link_to user_path(current_user),
+              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <i class="far fa-trash-alt"></i>
+            <% end %>
           </div>
         <% end %>
       </div>
@@ -75,36 +74,33 @@
   <% end %>
 </div>
 
-
-<%# On affiche review QUE s'il existe des reviews aux rides %>
 <div>
- <div class="section-blanche">
-  <h2>Reviews</h2>
-</div>
+  <div class="section-blanche">
+    <h2>Reviews</h2>
+  </div>
   <% if @reviews.nil? || @reviews.empty? %>
     <div class="notification user-card">
-    <p>No reviews yet</p>
+      <p>No reviews yet</p>
     </div>
   <% else %>
-    <%  @reviews.each do |review| %>
+    <% @reviews.each do |review| %>
       <div class="notification user-card">
-        <%# on affiche le createur de la review %>
         <%= cl_image_tag review.user.photo.key, width: 56, height: 56, crop: :thumb, gravity: :face, radius: :max %>
         <div class="notification-content">
           <p><small><%= time_ago_in_words(review.timestamp) %></small></p>
-          <p><strong>Rating:</strong><% review.rating.to_i.times do  %>
-            <i class="fa-solid fa-star" style="color: #ffc65a;"></i>
-            <% end %></p>
+          <p><strong>Rating:</strong>
+            <% review.rating.to_i.times do %>
+              <i class="fa-solid fa-star" style="color: #ffc65a;"></i>
+            <% end %>
+          </p>
           <p><strong>Comment:</strong> <%= review.comment %></p>
         </div>
-
-        <%# on affiche icone poubelle  %>
         <div class="notification-actions">
           <% if current_user == review.user %>
             <%= link_to user_path(@user),
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-              <i class="far fa-trash-alt"></i>
-            <% end %><hr>
+              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <i class="far fa-trash-alt"></i>
+            <% end %>
           <% end %>
         </div>
       </div>
