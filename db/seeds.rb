@@ -1,7 +1,7 @@
 require 'faker'
 require 'open-uri'
 VILLE = [
-  { name: 'Phoenix' , latitude:	-20.2867	,longitude:	57.5022	},
+  { name: 'Phoenix' , latitude:	-20.2867,longitude:	57.5022	},
   { name: 'Port-Louis', latitude: -20.1606, longitude: 57.4989 },
   { name: 'Grand Baie', latitude: -20.0063, longitude: 57.5816 },
   { name: 'Flic-en-Flac', latitude: -20.2807, longitude: 57.3605 },
@@ -144,13 +144,18 @@ futur_ride_elodie_seed = Ride.create(
 )
 puts "Created a ride with id: #{futur_ride_elodie_seed.id}"
 
+puts "creation d'un booking pour preview ride d'abhay"
+booking_elodie = Booking.create(
+  ride_id: futur_ride_elodie_seed.id,
+  user_id: george.id
+)
 puts "creation 1 review pour elodie"
 Review.create(
   rating: 5,
   comment: "Super ride in good company",
   timestamp: Time.now,
   user_id: george.id,
-  ride_id: futur_ride_elodie_seed.id
+  booking_id: booking_elodie.id
 )
 
 #----------------------------#
@@ -237,7 +242,7 @@ previews_ride_abhay_seed = Ride.create(
 puts "Created a ride with id: #{previews_ride_abhay_seed.id}"
 
 puts "creation d'un booking pour preview ride d'abhay"
-Booking.create(
+booking_abhay = Booking.create(
   ride_id: previews_ride_abhay_seed.id,
   user_id: milou.id
 )
@@ -246,8 +251,8 @@ Review.create(
   rating: 4,
   comment: "Nice driver",
   timestamp: Time.now,
-  user_id: juanita.id,
-  ride_id: previews_ride_abhay_seed.id
+  user_id: milou.id,
+  booking_id: booking_abhay.id
 )
 
 puts "Seeding completed successfully!"

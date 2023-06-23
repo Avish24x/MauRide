@@ -24,6 +24,10 @@ body {
   padding-top: 6rem;
 }
 
+.directions-control-instructions {
+  display: none;
+}
+
 .home-header h1 {
   font-family: 'Poppins', sans-serif;
   font-size: 3rem;
@@ -67,6 +71,8 @@ body {
   padding-bottom: 3rem;
   position: absolute;
   top: 46%;
+  padding: 10px;
+  margin-top: 10px;
 }
 
 .container-home-location h3 {

@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
+  get 'animation', to: 'pages#animation'
+
   # root to: "pages#prehome"
-  root to: "pages#home"
+  root to: 'pages#animation'
+  get 'home', to: 'pages#home', as: 'home'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -13,9 +17,6 @@ Rails.application.routes.draw do
   get '/search', to: 'rides#search', as: 'ride_search'
   get '/rides/search_start_location', to: 'rides#search_start_location', as: 'ride_search_start_location'
   get '/rides/search_end_location', to: 'rides#search_end_location', as: 'ride_search_end_location'
-
-
-
 
   resources :rides do
     resources :bookings, only: %i[create]

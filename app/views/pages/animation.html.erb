@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Animation Page</title>
+  <link rel="stylesheet" href="<%= asset_path('animate.min.css') %>">
+  <style>
+    .animation-page .footer {
+      display: none;
+    }
+  </style>
+</head>
+<body class="animation-page">
+  <div class="animation">
+    <!-- Add your animation content here -->
+    <h1 class="animate__animated animate__bounce">Mau<span>Ride</span> </h1>
+    <div class="button-container">
+  <%= link_to "Go to Home", home_path, class: "btn btn-primary" %> <!-- Update the link target -->
+    </div>
+  </div>
+</body>
+</html>

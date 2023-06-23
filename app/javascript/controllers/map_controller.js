@@ -15,6 +15,7 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/streets-v10",
       center: [57.5522, -20.3000],
       zoom: 9.212,
+
     });
 
     this.directions = new MapboxDirections({

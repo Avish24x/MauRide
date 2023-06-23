@@ -22,10 +22,10 @@ export default class extends Controller {
 
     // this.map.dragPan.disable();
     // this.map.scrollZoom.disable();
-    this.map.doubleClickZoom.disable();
+    // this.map.doubleClickZoom.disable();
     // this.map.touchZoomRotate.disable();
 
-    this.map.dragPan.disable();
+    // this.map.dragPan.disable();
     this.map.doubleClickZoom.disable();
     this.#addGeolocateControl();
     this.#loadNearbyRides();
