@@ -12,7 +12,6 @@ VILLE = [
   { name: 'Tamarin', latitude: -20.3191, longitude: 57.3706 },
   { name: 'Mahebourg', latitude: -20.4087, longitude: 57.7002 }
 ]
-
 puts "Deleting existing data..."
 Participant.delete_all
 Message.delete_all
@@ -24,7 +23,6 @@ EndLocation.destroy_all
 Ride.delete_all
 Vehicule.delete_all
 User.delete_all
-
 puts "Creating lea"
 lea = User.create(
   email: 'lea@gmail.com',
@@ -90,7 +88,6 @@ file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709268/b
 george.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
 george.save
 puts "created george photo"
-
 #----------------------------#
 elodie = User.create(
   email: 'elodie@gmail.com',
@@ -107,7 +104,6 @@ file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709266/1
 elodie.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
 elodie.save
 puts "created elodie photo"
-
 puts "Creating a vehicle for elodie..."
 vehicule_elodie_seed = Vehicule.create(
   model: "Audi A5",
@@ -115,7 +111,6 @@ vehicule_elodie_seed = Vehicule.create(
   user_id: elodie.id
 )
 puts "Created a vehicle for elodie."
-
 puts "Creating 1 ride for elodie..."
 ville_start = { name: 'Trou aux Biches', latitude: -20.0378, longitude: 57.5477 }
 ville_end = { name: 'Chamarel', latitude: -20.4281, longitude: 57.3742 }
@@ -129,7 +124,6 @@ end_location = EndLocation.create(
   longitude: ville_end[:longitude],
   address: ville_end[:name]
 )
-
 futur_ride_elodie_seed = Ride.create(
   start_location: start_location,
   end_location: end_location,
@@ -142,7 +136,6 @@ futur_ride_elodie_seed = Ride.create(
   vehicule_id: vehicule_elodie_seed.id
 )
 puts "Created a ride with id: #{futur_ride_elodie_seed.id}"
-
 puts "creation d'un booking pour preview ride d'abhay"
 booking_elodie = Booking.create(
   ride_id: futur_ride_elodie_seed.id,
@@ -156,7 +149,6 @@ Review.create(
   user_id: george.id,
   booking_id: booking_elodie.id
 )
-
 #----------------------------#
 puts "Creating abhay"
 abhay = User.create(
@@ -174,7 +166,6 @@ file = URI.open("https://res.cloudinary.com/dyzvwwvns/image/upload/v1685709267/2
 abhay.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
 abhay.save
 puts "created abhay photo"
-
 puts "Creating a vehicle for abhay..."
 vehicule_abhay_seed = Vehicule.create(
   model: "Hilux",
@@ -194,7 +185,6 @@ end_location = EndLocation.create(
   longitude: ville_end[:longitude],
   address: ville_end[:name]
 )
-
 futur_ride_abhay_seed = Ride.create(
   start_location: start_location,
   end_location: end_location,
@@ -207,9 +197,6 @@ futur_ride_abhay_seed = Ride.create(
   vehicule_id: vehicule_abhay_seed.id
 )
 puts "Created a ride with id: #{futur_ride_abhay_seed.id}"
-
-
-
 ville_start = VILLE.sample
 ville_end = VILLE.reject { |v| v[:name] == ville_start[:name] }.sample
 start_location = StartLocation.create(
@@ -222,11 +209,9 @@ end_location = EndLocation.create(
   longitude: ville_end[:longitude],
   address: ville_end[:name]
 )
-
 start_time_previews_abhay_seed = Faker::Time.between_dates(from: Date.today - 7, to: Date.today - 1, period: :all)
 duration = Time.parse("0#{rand(1..2)}:#{rand(0..5)}0:00").seconds_since_midnight.seconds
 end_time_abhay_previews_seed = start_time_previews_abhay_seed + duration
-
 previews_ride_abhay_seed = Ride.create(
   start_location: start_location,
   end_location: end_location,
@@ -239,7 +224,6 @@ previews_ride_abhay_seed = Ride.create(
   vehicule_id: vehicule_abhay_seed.id
 )
 puts "Created a ride with id: #{previews_ride_abhay_seed.id}"
-
 puts "creation d'un booking pour preview ride d'abhay"
 booking_abhay = Booking.create(
   ride_id: previews_ride_abhay_seed.id,
@@ -253,5 +237,4 @@ Review.create(
   user_id: milou.id,
   booking_id: booking_abhay.id
 )
-
 puts "Seeding completed successfully!"
