@@ -1,7 +1,6 @@
 require 'faker'
 require 'open-uri'
 VILLE = [
-  { name: 'Phoenix' , latitude:	-20.2867,longitude:	57.5022	},
   { name: 'Port-Louis', latitude: -20.1606, longitude: 57.4989 },
   { name: 'Grand Baie', latitude: -20.0063, longitude: 57.5816 },
   { name: 'Flic-en-Flac', latitude: -20.2807, longitude: 57.3605 },
@@ -136,8 +135,8 @@ futur_ride_elodie_seed = Ride.create(
   end_location: end_location,
   ride_details: "Non smoking ride, pet accepted",
   distance: 32,
-  start_time: "June 17, 2023 8:30 AM",
-  end_time: "June 17, 2023 10:00 AM",
+  start_time: "June 24, 2023 8:30 AM",
+  end_time: "June 24, 2023 10:00 AM",
   price: 150,
   seats: 4,
   vehicule_id: vehicule_elodie_seed.id
@@ -201,8 +200,8 @@ futur_ride_abhay_seed = Ride.create(
   end_location: end_location,
   ride_details: "Non smoking ride, pet accepted",
   distance: 32,
-  start_time: "June 17, 2023 13:00 PM",
-  end_time: "June 17, 2023 14:30 PM",
+  start_time: "June 24, 2023 13:00 PM",
+  end_time: "June 24, 2023 14:30 PM",
   price: 150,
   seats: 4,
   vehicule_id: vehicule_abhay_seed.id
